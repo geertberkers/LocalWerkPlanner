@@ -105,6 +105,9 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             setTitle("Gewerkt");
             showWork(true);
             drawerLayout.closeDrawer(listView);
+        } else if (menuAdapter.getItem(position).equals("Instellingen")) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
     }
 

@@ -76,8 +76,8 @@ public class WorkAdapter extends BaseAdapter {
         String dayOfWeekString = workList.get(position).getDayOfWeek();
         workItem.setText(workList.get(position).getWorkString());
         dayOfWeek.setText(dayOfWeekString);
-        editImageView.setImageResource(R.drawable.ic_mode_edit_black_36dp);
-        deleteImageView.setImageResource(R.drawable.ic_delete_black_36dp);
+        editImageView.setImageResource(R.drawable.ic_mode_edit_black_24dp);
+        deleteImageView.setImageResource(R.drawable.ic_delete_black_24dp);
 
         ArrayList<String> weekendDays = new ArrayList<>();
         weekendDays.add("Zaterdag");
