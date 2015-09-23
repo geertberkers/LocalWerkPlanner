@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Werk Planner</string>
+    <string name="action_plus">Add</string>
+    <string name="menu_picture">Menu picture</string>
+    <string name="edit_picture">Edit button</string>
+    <string name="delete_picture">Delete button</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+    <string name="addJob">Voeg werk toe!</string>
+    <string name="date">Datum:</string>
+    <string name="van">Van:</string>
+    <string name="douplePoint">:</string>
+    <string name="tot">Tot:</string>
+    <string name="line">-</string>
+    <string name="noWork">Nog geen werk toegevoegd!</string>
+</resources>
