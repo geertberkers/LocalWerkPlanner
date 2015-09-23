@@ -1,10 +1,7 @@
 package geert.berkers.localwerkplanner;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -16,10 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void showWork(boolean past) {
         mSwipeRefreshLayout.setRefreshing(false);
 
-        if(workList.isEmpty() || workList == null)
+        if(workList.isEmpty())
         {
             this.emptyTextView.setVisibility(View.VISIBLE);
             this.workListView.setVisibility(View.INVISIBLE);

@@ -27,7 +27,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String STARTTIME = "startTime";
     private static final String ENDTIME = "endTime";
 
-    private static final String[] COLUMNS = {DATE, STARTTIME, ENDTIME};
+    //private static final String[] COLUMNS = {DATE, STARTTIME, ENDTIME};
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -71,7 +71,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 4. close
         db.close();
     }
-
+/*
     public Work getWork(String date){
 
         // 1. get reference to readable DB
@@ -101,7 +101,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 5. return work
         return work;
     }
-
+*/
     public ArrayList<Work> getAllWorks() {
         ArrayList<Work> workList = new ArrayList<>();
 
@@ -128,7 +128,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // return works
         return workList;
     }
-
+/*
     public int updateWork(Work work) {
 
         // 1. get reference to writable DB
@@ -150,7 +150,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return i;
 
     }
-
+*/
     public void deleteWork(Work work) {
 
         // 1. get reference to writable DB
