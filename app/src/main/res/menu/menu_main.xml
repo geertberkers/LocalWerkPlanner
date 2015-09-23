@@ -4,6 +4,6 @@
     <item android:id="@+id/action_plus"
         android:title="@string/action_plus"
         android:orderInCategory="100"
-        android:icon="@mipmap/ic_add_work"
+        android:icon="@mipmap/ic_add_work_brown"
         app:showAsAction="always" />
 </menu>
