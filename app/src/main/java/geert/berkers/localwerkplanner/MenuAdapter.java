@@ -16,8 +16,8 @@ import android.widget.TextView;
 public class MenuAdapter extends BaseAdapter {
     private Context context;
 
-    private String[] sort ={"Planning","Gewerkt"/*,"Instellingen"*/};
-    private Integer[] images ={R.drawable.ic_schedule_black_36dp, R.drawable.ic_restore_black_36dp/*,R.drawable.ic_settings_black_36dp*/};
+    private String[] sort ={"Planning","Gewerkt", "Info"/*,"Instellingen"*/};
+    private Integer[] images ={R.drawable.ic_schedule_black_36dp, R.drawable.ic_restore_black_36dp, R.drawable.ic_info_outline_black_36dp/*,R.drawable.ic_settings_black_36dp*/};
 
     public MenuAdapter(Context context){
         this.context = context;

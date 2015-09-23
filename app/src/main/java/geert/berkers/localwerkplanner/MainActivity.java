@@ -1,5 +1,7 @@
 package geert.berkers.localwerkplanner;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
@@ -98,7 +100,19 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             setTitle("Gewerkt");
             showWork(true);
             drawerLayout.closeDrawer(listView);
-        } else if (menuAdapter.getItem(position).equals("Instellingen")) {
+        } else if (menuAdapter.getItem(position).equals("Info")) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Info");
+            alertDialog.setMessage("Simpele app om dagen bij te houden wanneer je moet werken!\n\nOntwikkelaar: Geert Berkers");
+            alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    // DO NOTHING
+                }
+            });
+            alertDialog.setIcon(R.drawable.ic_info_outline_black_36dp);
+            alertDialog.show();
+        }
+        else if (menuAdapter.getItem(position).equals("Instellingen")) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
