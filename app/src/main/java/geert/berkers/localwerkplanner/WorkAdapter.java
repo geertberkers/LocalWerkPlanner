@@ -26,15 +26,10 @@ public class WorkAdapter extends BaseAdapter {
 
     private ArrayList<Work> workList =  new ArrayList<>();
 
-    public WorkAdapter(Context context, ArrayList<Work> workList, boolean past, Activity activity){
+    public WorkAdapter(Context context, ArrayList<Work> workList, Activity activity){
         this.context = context;
         this.activity = activity;
-
-        for(Work w : workList) {
-            if (w.getPastBoolean() == past) {
-                this.workList.add(w.getWork());
-            }
-        }
+        this.workList = workList;
     }
 
     @Override
@@ -110,6 +105,9 @@ public class WorkAdapter extends BaseAdapter {
 
                         workList.remove(workList.get(position).getWork());
 
+                        if(workList.isEmpty()){
+                            MainActivity.refresh();
+                        }
                         notifyDataSetChanged();
                     }
                 });

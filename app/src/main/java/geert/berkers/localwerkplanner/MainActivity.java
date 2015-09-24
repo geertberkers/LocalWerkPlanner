@@ -1,6 +1,7 @@
 package geert.berkers.localwerkplanner;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,6 +25,7 @@ import java.util.Date;
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
+    static Context context;
     private MySQLiteHelper db;
 
     private ListView listView;
@@ -42,6 +44,16 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle b = getIntent().getExtras();
+        try {
+            boolean x = b.getBoolean("finish");
+            if (x) {
+                finish();
+            }
+        }
+        catch (Exception ex){
+            System.out.println("No finish");
+        }
         initControls();
 
         db = new MySQLiteHelper(this);
@@ -70,10 +82,12 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         getWorkFromDatabase();
     }
 
     private void initControls() {
+        context = this.getApplicationContext();
         listView = (ListView) findViewById(R.id.drawerList);
         workListView = (ListView) findViewById(R.id.workList);
         emptyTextView = (TextView) findViewById(R.id.emptyText);
@@ -103,7 +117,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         } else if (menuAdapter.getItem(position).equals("Info")) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Info");
-            alertDialog.setMessage("Simpele app om dagen bij te houden wanneer je moet werken!\n\nOntwikkelaar: Geert Berkers");
+            alertDialog.setMessage("Simpele werk planner!\n\nOntwikkelaar: Geert Berkers");
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int which) {
                     // DO NOTHING
@@ -121,15 +135,29 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void showWork(boolean past) {
         mSwipeRefreshLayout.setRefreshing(false);
 
-        if(workList.isEmpty())
+        ArrayList<Work> tempWorkList = new ArrayList<>();
+
+        for(Work w : workList) {
+            if (w.getPastBoolean() == past) {
+                tempWorkList.add(w.getWork());
+            }
+        }
+
+        if(tempWorkList.isEmpty())
         {
+            if(past){
+                emptyTextView.setText("Nog niet gewerkt!");
+            }
+            else{
+                emptyTextView.setText("Nog geen werk toegevoegd!");
+            }
             this.emptyTextView.setVisibility(View.VISIBLE);
             this.workListView.setVisibility(View.INVISIBLE);
         } else {
             sortList();
             this.workListView.setVisibility(View.VISIBLE);
             this.emptyTextView.setVisibility(View.INVISIBLE);
-            WorkAdapter workAdapter = new WorkAdapter(this.getApplicationContext(), workList, past, MainActivity.this);
+            WorkAdapter workAdapter = new WorkAdapter(this.getApplicationContext(), tempWorkList, MainActivity.this);
             workListView.setAdapter(workAdapter);
         }
     }
@@ -151,7 +179,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         if (id == R.id.action_plus) {
             Intent workEditorIntent = new Intent(this, WorkEditor.class);
-            workEditorIntent.putExtra("workList", workList);
             startActivity(workEditorIntent);
 
             return true;
@@ -198,5 +225,12 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         } else {
             showWork(false);
         }
+    }
+
+    public static void refresh() {
+        Intent i = new Intent(context, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("finish", true);
+        context.startActivity(i);
     }
 }
