@@ -117,7 +117,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         } else if (menuAdapter.getItem(position).equals("Info")) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Info");
-            alertDialog.setMessage("Simpele werk planner!\n\nOntwikkelaar: Geert Berkers");
+            alertDialog.setMessage("Simpele werk planner!\nVersie: 1.0\nOntwikkelaar: Geert Berkers");
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int which) {
                     // DO NOTHING

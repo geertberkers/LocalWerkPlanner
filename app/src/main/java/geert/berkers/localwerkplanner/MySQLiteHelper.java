@@ -66,8 +66,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // 3. insert
         //db.insert(table, nullColumnHack, key/value -> keys = column names/ values = column values
-        db.insert(TABLE_WORK, null, values);
-
+        try {
+            db.insert(TABLE_WORK, null, values);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
         // 4. close
         db.close();
     }
