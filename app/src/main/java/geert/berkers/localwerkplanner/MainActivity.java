@@ -25,7 +25,6 @@ import java.util.Date;
 
 public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
 
-    static Context context;
     private MySQLiteHelper db;
 
     private ListView listView;
@@ -44,16 +43,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle b = getIntent().getExtras();
-        try {
-            boolean x = b.getBoolean("finish");
-            if (x) {
-                finish();
-            }
-        }
-        catch (Exception ex){
-            System.out.println("No finish");
-        }
         initControls();
 
         db = new MySQLiteHelper(this);
@@ -82,12 +71,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         getWorkFromDatabase();
     }
 
     private void initControls() {
-        context = this.getApplicationContext();
         listView = (ListView) findViewById(R.id.drawerList);
         workListView = (ListView) findViewById(R.id.workList);
         emptyTextView = (TextView) findViewById(R.id.emptyText);
@@ -117,12 +104,13 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         } else if (menuAdapter.getItem(position).equals("Info")) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle("Info");
-            alertDialog.setMessage("Simpele werk planner!\nVersie: 1.0\nOntwikkelaar: Geert Berkers");
+            alertDialog.setMessage("Simpele werk planner!\nVersie: 1.0.1\nOntwikkelaar: Geert Berkers");
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int which) {
                     // DO NOTHING
                 }
             });
+
             alertDialog.setIcon(R.drawable.ic_info_outline_black_36dp);
             alertDialog.show();
         }
@@ -134,30 +122,29 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     public void showWork(boolean past) {
         mSwipeRefreshLayout.setRefreshing(false);
+        if (past) {
+            emptyTextView.setText("Nog niet gewerkt!");
+        } else {
+            emptyTextView.setText("Nog geen werk toegevoegd!");
+        }
 
         ArrayList<Work> tempWorkList = new ArrayList<>();
 
-        for(Work w : workList) {
-            if (w.getPastBoolean() == past) {
-                tempWorkList.add(w.getWork());
+        if (!workList.isEmpty()) {
+            for (Work w : workList) {
+                if (w.getPastBoolean() == past) {
+                    tempWorkList.add(w.getWork());
+                }
             }
         }
-
-        if(tempWorkList.isEmpty())
-        {
-            if(past){
-                emptyTextView.setText("Nog niet gewerkt!");
-            }
-            else{
-                emptyTextView.setText("Nog geen werk toegevoegd!");
-            }
+        if (tempWorkList.isEmpty()) {
             this.emptyTextView.setVisibility(View.VISIBLE);
             this.workListView.setVisibility(View.INVISIBLE);
         } else {
-            sortList();
+            sortList(tempWorkList);
             this.workListView.setVisibility(View.VISIBLE);
             this.emptyTextView.setVisibility(View.INVISIBLE);
-            WorkAdapter workAdapter = new WorkAdapter(this.getApplicationContext(), tempWorkList, MainActivity.this);
+            WorkAdapter workAdapter = new WorkAdapter(this.getApplicationContext(), tempWorkList, MainActivity.this, listView, emptyTextView);
             workListView.setAdapter(workAdapter);
         }
     }
@@ -202,7 +189,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         drawerListener.syncState();
     }
 
-    private void sortList() {
+    private void sortList(ArrayList<Work> workList) {
         Collections.sort(workList, new Comparator<Work>() {
             @Override
             public int compare(Work o1, Work o2) {
@@ -225,12 +212,5 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         } else {
             showWork(false);
         }
-    }
-
-    public static void refresh() {
-        Intent i = new Intent(context, MainActivity.class);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.putExtra("finish", true);
-        context.startActivity(i);
     }
 }

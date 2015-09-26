@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,12 +25,17 @@ public class WorkAdapter extends BaseAdapter {
 
     private Activity activity;
 
+    private ListView listView;
+    private TextView emptyTextView;
+
     private ArrayList<Work> workList =  new ArrayList<>();
 
-    public WorkAdapter(Context context, ArrayList<Work> workList, Activity activity){
+    public WorkAdapter(Context context, ArrayList<Work> workList, Activity activity, ListView listView, TextView emptyTextView) {
         this.context = context;
         this.activity = activity;
         this.workList = workList;
+        this.listView = listView;
+        this.emptyTextView = emptyTextView;
     }
 
     @Override
@@ -93,7 +99,7 @@ public class WorkAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-                alertDialog.setTitle("Delete werk");
+                alertDialog.setTitle("Verwijder werk");
                 alertDialog.setMessage("Weet je het zeker?");
                 alertDialog.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int which) {
@@ -106,9 +112,16 @@ public class WorkAdapter extends BaseAdapter {
                         workList.remove(workList.get(position).getWork());
 
                         if(workList.isEmpty()){
-                            MainActivity.refresh();
+
+                            listView.setVisibility(View.INVISIBLE);
+                            emptyTextView.setVisibility(View.VISIBLE);
+                            notifyDataSetChanged();
                         }
-                        notifyDataSetChanged();
+                        else {
+                            listView.setVisibility(View.VISIBLE);
+                            emptyTextView.setVisibility(View.INVISIBLE);
+                            notifyDataSetChanged();
+                        }
                     }
                 });
                 alertDialog.setNegativeButton("Nee", new DialogInterface.OnClickListener() {

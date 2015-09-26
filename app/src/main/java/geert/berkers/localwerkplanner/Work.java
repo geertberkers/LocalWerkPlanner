@@ -39,10 +39,14 @@ public class Work implements Parcelable, Comparable<Work>{
                 past = true;
             }
             else if (date.equals(currentDate)) {
+
                 DateFormat time = new SimpleDateFormat("HH:mm");
                 String timeString = time.format(Calendar.getInstance().getTime());
-                if(endTime.compareTo(timeString) != 1){
-                    past = true;
+
+                if (Integer.valueOf(timeString.substring(0, 2)) >= Integer.valueOf(endTime.substring(0, 2))) {
+                    if (Integer.valueOf(timeString.substring(3)) > Integer.valueOf(endTime.substring(3))) {
+                        past = true;
+                    }
                 }
             }
         }

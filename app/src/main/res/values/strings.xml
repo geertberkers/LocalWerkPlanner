@@ -13,4 +13,5 @@
     <string name="tot">Tot:</string>
     <string name="line">-</string>
     <string name="noWork">Nog geen werk toegevoegd!</string>
+    <string name="addMoreJobs">Voeg meer werkdagen toe!</string>
 </resources>
