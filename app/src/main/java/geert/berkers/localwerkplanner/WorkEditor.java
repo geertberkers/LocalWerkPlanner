@@ -1,8 +1,10 @@
 package geert.berkers.localwerkplanner;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
@@ -15,9 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by Geert on 11-9-2015
@@ -58,7 +57,7 @@ public class WorkEditor extends ActionBarActivity {
     }
 
     public void setActionbar() {
-        setTitle("Werk toevoegen");
+        setTitle(getString(R.string.add_job));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,20 +82,24 @@ public class WorkEditor extends ActionBarActivity {
     public void setWorkToEdit() {
         Bundle b = getIntent().getExtras();
 
+        final SharedPreferences sharedPref= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        String dateFormat = sharedPref.getString("dateFormat", "dd-MM-yyy");
+
         try {
             workToEdit = b.getParcelable("workParcelable");
             if (workToEdit != null) {
-                dayPicker.setText(workToEdit.getWorkString().substring(0, 2));
-                monthPicker.setText(workToEdit.getWorkString().substring(3, 5));
-                yearPicker.setText(workToEdit.getWorkString().substring(6, 10));
+                dayPicker.setText(workToEdit.getWorkString(dateFormat).substring(0, 2));
+                monthPicker.setText(workToEdit.getWorkString(dateFormat).substring(3, 5));
+                yearPicker.setText(workToEdit.getWorkString(dateFormat).substring(6, 10));
                 startHourPicker.setText(workToEdit.getStartTime().substring(0, 2));
                 startMinutePicker.setText(workToEdit.getStartTime().substring(3, 5));
                 endHourPicker.setText(workToEdit.getEndTime().substring(0, 2));
                 endMinutePicker.setText(workToEdit.getEndTime().substring(3, 5));
 
-                btnAddWork.setText("Werk aanpassen!");
+                btnAddWork.setText(R.string.change_job);
                 btnAddExtraWork.setVisibility(View.INVISIBLE);
-                setTitle("Werk aanpassen");
+                setTitle(R.string.change_job);
             }
         } catch (Exception ex) {
             Time now = new Time();
@@ -116,9 +119,27 @@ public class WorkEditor extends ActionBarActivity {
 
             String sYear = String.valueOf(year);
 
-            dayPicker.setText(String.valueOf(sDay));
-            monthPicker.setText(String.valueOf(sMonth));
+            switch (dateFormat){
+                case "dd-MM-yyyy":
+                    dayPicker.setText(String.valueOf(sDay));
+                    monthPicker.setText(String.valueOf(sMonth));
+                    break;
+                case "MM-dd-yyyy":
+                    dayPicker.setText(String.valueOf(sMonth));
+                    monthPicker.setText(String.valueOf(sDay));
+                    break;
+            }
             yearPicker.setText(String.valueOf(sYear));
+
+            startHourS  =  sharedPref.getString("fav_start_time_hour", "18");
+            startMinuteS  =  sharedPref.getString("fav_start_time_minute", "00");
+            endHourS  =  sharedPref.getString("fav_end_time_hour", "20");
+            endMinuteS  =  sharedPref.getString("fav_end_time_minute", "30");
+
+            startHourPicker.setText(startHourS);
+            startMinutePicker.setText(startMinuteS);
+            endHourPicker.setText(endHourS);
+            endMinutePicker.setText(endMinuteS);
 
             btnAddExtraWork.setVisibility(View.VISIBLE);
 
@@ -249,19 +270,20 @@ public class WorkEditor extends ActionBarActivity {
         if (endMinute.length() == 1) { endMinute = "0" + endMinute; }
 
         if(oneFieldIsNull()){
-            Toast.makeText(this, "Voer alle velden in!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.empte_field, Toast.LENGTH_LONG).show();
         }else if(!checkIfDateCorrect()){
-            Toast.makeText(this, "Datum niet goed ingevoerd!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.incorrect_date, Toast.LENGTH_LONG).show();
         } else if(Integer.valueOf(startHour) > 23 || Integer.valueOf(startMinute) > 59) {
-            Toast.makeText(this, "Starttijd niet goed ingevoerd!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.starttime_error, Toast.LENGTH_LONG).show();
         } else if(Integer.valueOf(endHour) > 23 || Integer.valueOf(endMinute) > 59) {
-            Toast.makeText(this, "Eindtijd niet goed ingevoerd!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.endtime_error, Toast.LENGTH_LONG).show();
         } else if (Integer.valueOf((startHour + startMinute)) > Integer.valueOf((endHour + endHour)) ){
-            Toast.makeText(this, "Starttijd kan niet na eindtijd!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.start_after_end, Toast.LENGTH_LONG).show();
         } else {
             MySQLiteHelper db = new MySQLiteHelper(this);
             Work workInDatabase = db.getWork(day + "-" + month + "-" + year);
-            Work newWork = new Work(parseDate(day, month, year), startHour + ":" + startMinute, endHour + ":" + endMinute);
+            String date = day + "-" + month + "-" + year;
+            Work newWork = new Work(MainActivity.parseDate(date), startHour + ":" + startMinute, endHour + ":" + endMinute);
 
             if (workToEdit == null) {
                 if (workInDatabase == null) {
@@ -271,10 +293,10 @@ public class WorkEditor extends ActionBarActivity {
                         finish();
                     }
                     else if (view.getId() == btnAddExtraWork.getId()) {
-                        Toast.makeText(this, "Werk toegevoegen gelukt!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, R.string.work_added, Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(this, "Werk met deze datum bestaat al!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.date_exists, Toast.LENGTH_LONG).show();
                 }
             }else {
                 if(workInDatabase == null) {
@@ -330,15 +352,6 @@ public class WorkEditor extends ActionBarActivity {
             System.out.println("Date incorrect");
         }
         return correct;
-    }
-
-    public static Date parseDate(String day, String month, String year) {
-        try {
-            String date = day + "-" + month + "-" + year;
-            return new SimpleDateFormat("dd-MM-yyyy").parse(date);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
     @Override

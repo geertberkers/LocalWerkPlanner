@@ -1,0 +1,54 @@
+<resources>
+    <string name="work_planner">Werk Planner</string>
+    <string name="action_plus">Toevoegen</string>
+    <string name="menu_picture">Menu picture</string>
+    <string name="edit_picture">Aanpasknop</string>
+    <string name="delete_picture">Verwijderknop</string>
+    <string name="drawer_open">Open menu</string>
+    <string name="drawer_close">Sluit menu</string>
+    <string name="addJob">Voeg werk toe!</string>
+    <string name="date">Datum:</string>
+    <string name="van">Van:</string>
+    <string name="douplePoint">:</string>
+    <string name="tot">Tot:</string>
+    <string name="line">-</string>
+    <string name="noWork">Nog geen werk toegevoegd!</string>
+    <string name="addMoreJobs">Voeg meer werkdagen toe!</string>
+    <string name="testSetting">Test settings</string>
+    <string name="cancel">Annuleren</string>
+    <string name="save">Opslaan</string>
+    <string name="planner">Planning</string>
+    <string name="history">Gewerkt</string>
+    <string name="info">Info</string>
+    <string name="info_popup">Simpele werk planner!\nVersie: 1.0.1\nOntwikkelaar: Geert Berkers</string>
+    <string name="settings">Instellingen</string>
+    <string name="not_worked_yet">Nog niet gewerkt!</string>
+    <string name="no_work_added">Nog geen werk toegevoegd!</string>
+    <string name="delete_work">Verwijder werk</string>
+    <string name="confirmation">Weet je het zeker?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nee</string>
+    <string name="add_job">Werk toevoegen</string>
+    <string name="change_job">Werk aanpassen!</string>
+    <string name="empte_field">Voer alle velden in!</string>
+    <string name="incorrect_date">Datum niet goed ingevoerd!</string>
+    <string name="starttime_error">Starttijd niet goed ingevoerd!</string>
+    <string name="endtime_error">Eindtijd niet goed ingevoerd!</string>
+    <string name="start_after_end">Starttijd kan niet na eindtijd!</string>
+    <string name="work_added">Werk toegevoegen gelukt!</string>
+    <string name="date_exists">Werk met deze datum bestaat al!</string>
+    <string name="setting_saved">Instellingen opgeslagen!</string>
+
+    <string-array name="menu">
+        <item>Planning</item>
+        <item>Gewerkt</item>
+        <item>Instellingen</item>
+        <item>Info</item>
+    </string-array>
+
+    <string-array name="weekendDays">
+        <item>Zaterdag</item>
+        <item>Zondag</item>
+    </string-array>
+
+</resources>

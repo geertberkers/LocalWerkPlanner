@@ -1,18 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:text="Favorite start time:"
+        android:id="@+id/vanTijd"
+        android:layout_marginStart="20dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:id="@+id/favStartTimeHour"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/vanTijd"
+        android:singleLine="true"
+        android:gravity="center"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="18" />
+
+    <TextView
+        android:text="@string/douplePoint"
+        android:id="@+id/vanTijdSeperator"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/favStartTimeHour"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:id="@+id/favStartTimeMinute"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/vanTijdSeperator"
+        android:singleLine="true"
+        android:gravity="center"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="00" />
 
 
     <TextView
+        android:text="Favorite end time:"
+        android:id="@+id/totTijd"
+        android:layout_width="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vanTijd"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:id="@+id/favEndTimeHour"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/totTijd"
+        android:layout_below="@+id/favStartTimeHour"
+        android:singleLine="true"
+        android:gravity="center"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="20" />
+
+    <TextView
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:text="@string/douplePoint"
+        android:id="@+id/totTijdSeperator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Test settings"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/vanTijdSeperator"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toEndOf="@+id/favEndTimeHour"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_marginEnd="20dp"
+        android:id="@+id/favEndTimeMinute"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:singleLine="true"
+        android:gravity="center"
+        android:layout_below="@+id/favStartTimeMinute"
+        android:layout_toEndOf="@id/totTijdSeperator"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="30" />
+
+
+
+    <TextView
+        android:text="Date format:"
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/totTijd"
+        android:layout_alignParentStart="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dd-MM-yyyy"
+        android:id="@+id/rbDayFirst"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/favEndTimeHour"
+        android:layout_toEndOf="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MM-dd-yyyy"
+        android:id="@+id/rbMonthFirst"
+        android:layout_below="@+id/rbDayFirst"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/textView"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -26,14 +145,19 @@
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Annuleren"
-            android:id="@+id/btnCancel" />
+            android:text="@string/cancel"
+            android:id="@+id/btnCancel"
+            android:onClick="onCancelClick"/>
 
         <Button
             android:layout_weight="0.5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Opslaan"
-            android:id="@+id/btnSave" />
+            android:text="@string/save"
+            android:id="@+id/btnSave"
+            android:onClick="onSaveClick"/>
     </LinearLayout>
+
+
+
 </RelativeLayout>

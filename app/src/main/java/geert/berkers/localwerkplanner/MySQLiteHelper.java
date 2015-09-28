@@ -70,7 +70,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             db.insert(TABLE_WORK, null, values);
         } catch (Exception ex) {
             Log.e("Error 1", ex.toString());
-            ;
         }
         // 4. close
         db.close();
@@ -92,8 +91,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 4. build work object
         Work work = null;
         try {
-            work = new Work(MainActivity.parseDate(cursor.getString(0)),cursor.getString(1),cursor.getString(2));
-            Log.d("getWork(" + date + ")", work.toString());
+            if (cursor != null) {
+                work = new Work(MainActivity.parseDate(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+                Log.d("getWork(" + date + ")", work.toString());
+            }
         }
         catch (Exception ex)
         {

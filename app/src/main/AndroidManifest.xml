@@ -5,11 +5,11 @@ package="geert.berkers.localwerkplanner" >
 <application
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
+    android:label="@string/work_planner"
     android:theme="@style/AppTheme" >
     <activity
         android:name=".MainActivity"
-        android:label="@string/app_name" >
+        android:label="@string/work_planner" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +21,7 @@ package="geert.berkers.localwerkplanner" >
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
     </activity>
+    <activity android:name=".SettingsActivity"></activity>
 </application>
 
 </manifest>

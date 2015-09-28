@@ -29,7 +29,6 @@
                 android:layout_alignParentStart="true" />
 
             <EditText
-                android:text="11"
                 android:gravity="center"
                 android:singleLine="true"
                 android:id="@+id/dayPicker"
@@ -38,8 +37,8 @@
                 android:layout_toEndOf="@+id/txtDatum"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:nextFocusRight="@+id/monthPicker"
-                android:maxLength="2"/>
+                android:maxLength="2"
+                android:text="15" />
 
             <TextView
                 android:id="@+id/lineMonth"
@@ -53,7 +52,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <EditText
-                android:text="09"
                 android:singleLine="true"
                 android:layout_width="50dp"
                 android:id="@+id/monthPicker"
@@ -62,8 +60,8 @@
                 android:gravity="center"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:nextFocusRight="@+id/yearPicker"
-                android:maxLength="2"/>
+                android:maxLength="2"
+                android:text="09" />
 
             <TextView
                 android:id="@+id/lineYear"
@@ -77,7 +75,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <EditText
-                android:text="2015"
                 android:id="@+id/yearPicker"
                 android:layout_marginEnd="20dp"
                 android:layout_width="50dp"
@@ -87,8 +84,8 @@
                 android:gravity="center"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:nextFocusRight="@+id/startHourPicker"
-                android:maxLength="4"/>
+                android:maxLength="4"
+                android:text="2015" />
 
 
         </RelativeLayout>
@@ -111,7 +108,6 @@
                 android:layout_alignParentStart="true" />
 
             <EditText
-                android:text="18"
                 android:layout_width="50dp"
                 android:id="@+id/startHourPicker"
                 android:layout_height="wrap_content"
@@ -120,8 +116,8 @@
                 android:gravity="center"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:nextFocusRight="@+id/startMinutePicker"
-                android:maxLength="2"/>
+                android:maxLength="2"
+                android:text="18" />
 
             <TextView
                 android:text="@string/douplePoint"
@@ -135,7 +131,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:text="00"
                 android:layout_width="50dp"
                 android:id="@+id/startMinutePicker"
                 android:layout_height="wrap_content"
@@ -144,8 +139,8 @@
                 android:gravity="center"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:nextFocusRight="@+id/endHourPicker"
-                android:maxLength="2"/>
+                android:maxLength="2"
+                android:text="00" />
 
         </RelativeLayout>
 
@@ -166,7 +161,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:text="20"
                 android:layout_width="50dp"
                 android:id="@+id/endHourPicker"
                 android:layout_height="wrap_content"
@@ -175,8 +169,8 @@
                 android:gravity="center"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:nextFocusRight="@id/dayPicker"
-                android:maxLength="2"/>
+                android:maxLength="2"
+                android:text="20" />
 
             <TextView
                 android:layout_marginEnd="10dp"
@@ -190,7 +184,6 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <EditText
-                android:text="30"
                 android:layout_width="50dp"
                 android:layout_marginEnd="20dp"
                 android:id="@+id/endMinutePicker"
@@ -201,7 +194,8 @@
                 android:layout_toEndOf="@id/totTijdSeperator"
                 android:digits="0123456789"
                 android:inputType="number"
-                android:maxLength="2"/>
+                android:maxLength="2"
+                android:text="30" />
 
         </RelativeLayout>
     </LinearLayout>

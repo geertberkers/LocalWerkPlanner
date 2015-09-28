@@ -1,7 +1,6 @@
 package geert.berkers.localwerkplanner;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -93,18 +92,18 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void selectItem(int position) {
         listView.setItemChecked(position, true);
 
-        if (menuAdapter.getItem(position).equals("Planning")) {
-            setTitle("Werk Planner");
+        if (menuAdapter.getItem(position).equals(getString(R.string.planner))) {
+            setTitle(getString(R.string.work_planner));
             showWork(false);
             drawerLayout.closeDrawer(listView);
-        } else if (menuAdapter.getItem(position).equals("Gewerkt")) {
-            setTitle("Gewerkt");
+        } else if (menuAdapter.getItem(position).equals(getString(R.string.history))) {
+            setTitle(getString(R.string.history));
             showWork(true);
             drawerLayout.closeDrawer(listView);
-        } else if (menuAdapter.getItem(position).equals("Info")) {
+        } else if (menuAdapter.getItem(position).equals(getString(R.string.info))) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle("Info");
-            alertDialog.setMessage("Simpele werk planner!\nVersie: 1.0.1\nOntwikkelaar: Geert Berkers");
+            alertDialog.setTitle(R.string.info);
+            alertDialog.setMessage(R.string.info_popup);
             alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialogInterface, int which) {
                     // DO NOTHING
@@ -114,7 +113,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             alertDialog.setIcon(R.drawable.ic_info_outline_black_36dp);
             alertDialog.show();
         }
-        else if (menuAdapter.getItem(position).equals("Instellingen")) {
+        else if (menuAdapter.getItem(position).equals(getString(R.string.settings))) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
@@ -123,9 +122,9 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void showWork(boolean past) {
         mSwipeRefreshLayout.setRefreshing(false);
         if (past) {
-            emptyTextView.setText("Nog niet gewerkt!");
+            emptyTextView.setText(R.string.not_worked_yet);
         } else {
-            emptyTextView.setText("Nog geen werk toegevoegd!");
+            emptyTextView.setText(R.string.no_work_added);
         }
 
         ArrayList<Work> tempWorkList = new ArrayList<>();
@@ -207,10 +206,20 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     public void getWorkFromDatabase() {
         workList = db.getAllWorks();
 
-        if (getTitle().toString().equals("Gewerkt")) {
+        if (getTitle().toString().equals(getString(R.string.history))) {
             showWork(true);
         } else {
             showWork(false);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        boolean drawerOpen = drawerLayout.isDrawerOpen(listView);
+        if(drawerOpen){
+            drawerLayout.closeDrawer(listView);
+        } else {
+            super.onBackPressed();
         }
     }
 }

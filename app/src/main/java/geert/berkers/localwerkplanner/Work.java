@@ -1,7 +1,9 @@
 package geert.berkers.localwerkplanner;
 
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,7 +32,7 @@ public class Work implements Parcelable, Comparable<Work>{
 
         String dateString = df.format(Calendar.getInstance().getTime());
 
-        Date currentDate = parseDate(dateString);
+        Date currentDate = MainActivity.parseDate(dateString);
 
         past = false;
 
@@ -71,8 +73,10 @@ public class Work implements Parcelable, Comparable<Work>{
         return endTime;
     }
 
-    public String getWorkString() {
-        return df.format(date) + "       " + startTime + "-" + endTime;
+    public String getWorkString(String dateFormat) {
+
+        DateFormat showDateFormat = new SimpleDateFormat(dateFormat);
+        return showDateFormat.format(date) + "       " + startTime + "-" + endTime;
     }
 
     public String getDate(boolean yearFirst) {
@@ -89,17 +93,9 @@ public class Work implements Parcelable, Comparable<Work>{
         return past;
     }
 
-    public static Date parseDate(String date) {
-        try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(date);
-        } catch (ParseException e) {
-            return null;
-        }
-    }
-
     public Work(Parcel read){
         this.past = false;
-        this.date = parseDate(read.readString());
+        this.date = MainActivity.parseDate(read.readString());
         this.dayOfWeek = read.readString();
         this.startTime = read.readString();
         this.endTime = read.readString();
@@ -138,7 +134,7 @@ public class Work implements Parcelable, Comparable<Work>{
 
     @Override
     public int compareTo(@NonNull Work otherWork) {
-        return this.getWorkString().compareTo(otherWork.getWorkString());
+        return this.getWorkString("dd-MM-yyyy").compareTo(otherWork.getWorkString("dd-MM-yyyy"));
     }
 
     @Override

@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,22 +70,34 @@ public class WorkAdapter extends BaseAdapter {
         ImageView editImageView = (ImageView) row.findViewById(R.id.editPicture);
         ImageView deleteImageView = (ImageView) row.findViewById(R.id.deletePicture);
 
+        final SharedPreferences sharedPref= PreferenceManager.getDefaultSharedPreferences(activity.getBaseContext());
+
+        String dateFormat = sharedPref.getString("dateFormat", "dd-MM-yyy");
         String dayOfWeekString = workList.get(position).getDayOfWeek();
-        workItem.setText(workList.get(position).getWorkString());
+        workItem.setText(workList.get(position).getWorkString(dateFormat));
         dayOfWeek.setText(dayOfWeekString);
         editImageView.setImageResource(R.drawable.ic_mode_edit_black_24dp);
         deleteImageView.setImageResource(R.drawable.ic_delete_black_24dp);
 
-        ArrayList<String> weekendDays = new ArrayList<>();
+
+        String[] weekendDays = context.getResources().getStringArray(R.array.weekendDays);
+        /*
+        weekendDays.addAll(context.getResources().getStringArray(R.array.weekendDays));
         weekendDays.add("Zaterdag");
         weekendDays.add("Saturday");
         weekendDays.add("Zondag");
         weekendDays.add("Sunday");
-
-        if (weekendDays.contains(dayOfWeekString)) {
+*/
+        for(String s : weekendDays){
+            if(s.equals(dayOfWeekString)){
+                row.setBackgroundResource(R.color.transBlauw);
+            }
+        }
+        /*
+        if (weekendDays.(dayOfWeekString)) {
             row.setBackgroundResource(R.color.transBlauw);
         }
-
+*/
         editImageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -99,11 +113,10 @@ public class WorkAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-                alertDialog.setTitle("Verwijder werk");
-                alertDialog.setMessage("Weet je het zeker?");
-                alertDialog.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                alertDialog.setTitle(R.string.delete_work);
+                alertDialog.setMessage(R.string.confirmation);
+                alertDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogInterface, int which) {
-                        //TODO: DELETE IN DATABASE
 
                         Dialog dialog = (Dialog) dialogInterface;
                         MySQLiteHelper db = new MySQLiteHelper(dialog.getContext());
@@ -124,7 +137,7 @@ public class WorkAdapter extends BaseAdapter {
                         }
                     }
                 });
-                alertDialog.setNegativeButton("Nee", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing
                     }
