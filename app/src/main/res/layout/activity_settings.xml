@@ -2,136 +2,174 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="20dp">
+    android:layout_height="match_parent">
 
+    <!-- Header and line -->
     <TextView
-        android:text="Favorite start time:"
-        android:id="@+id/vanTijd"
-        android:layout_marginStart="20dp"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="50dp"
-        android:id="@+id/favStartTimeHour"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/vanTijd"
-        android:singleLine="true"
-        android:gravity="center"
-        android:digits="0123456789"
-        android:inputType="number"
-        android:maxLength="2"
-        android:text="18" />
-
-    <TextView
-        android:text="@string/douplePoint"
-        android:id="@+id/vanTijdSeperator"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/timeHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/favStartTimeHour"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:layout_width="50dp"
-        android:id="@+id/favStartTimeMinute"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/vanTijdSeperator"
-        android:singleLine="true"
-        android:gravity="center"
-        android:digits="0123456789"
-        android:inputType="number"
-        android:maxLength="2"
-        android:text="00" />
-
-
-    <TextView
-        android:text="Favorite end time:"
-        android:id="@+id/totTijd"
-        android:layout_width="200dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vanTijd"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:layout_width="50dp"
-        android:id="@+id/favEndTimeHour"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/totTijd"
-        android:layout_below="@+id/favStartTimeHour"
-        android:singleLine="true"
-        android:gravity="center"
-        android:digits="0123456789"
-        android:inputType="number"
-        android:maxLength="2"
-        android:text="20" />
-
-    <TextView
-        android:layout_marginEnd="10dp"
+        android:text="@string/time"
         android:layout_marginStart="10dp"
-        android:text="@string/douplePoint"
-        android:id="@+id/totTijdSeperator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/vanTijdSeperator"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/favEndTimeHour"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="5dp" />
 
-    <EditText
-        android:layout_width="50dp"
-        android:layout_marginEnd="20dp"
-        android:id="@+id/favEndTimeMinute"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:singleLine="true"
-        android:gravity="center"
-        android:layout_below="@+id/favStartTimeMinute"
-        android:layout_toEndOf="@id/totTijdSeperator"
-        android:digits="0123456789"
-        android:inputType="number"
-        android:maxLength="2"
-        android:text="30" />
+    <View
+        android:id="@+id/timeHeaderDivider"
+        android:layout_below="@+id/timeHeader"
+        android:layout_marginBottom="1dp"
+        style="@style/Divider"
+        />
 
-
+    <!-- From time -->
+    <ImageView
+        android:id="@+id/favStartIcon"
+        android:layout_marginStart="10dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_star_rate_black_18dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/timeHeaderDivider"
+        android:layout_alignTop="@+id/editStartTimeFav"
+        android:layout_alignBottom="@+id/editStartTimeFav"/>
 
     <TextView
-        android:text="Date format:"
-        android:id="@+id/textView"
+        android:id="@+id/vanTijd"
+        android:text="@string/fav_starttime"
+        android:gravity="center_vertical"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/favStartIcon"
+        android:layout_alignTop="@+id/editStartTimeFav"
+        android:layout_alignBottom="@+id/editStartTimeFav"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_setting"
+        android:id="@+id/txtStartTime"
+        android:gravity="center_vertical"
+        android:layout_below="@id/timeHeaderDivider"
+        android:layout_alignTop="@+id/editStartTimeFav"
+        android:layout_alignBottom="@+id/editStartTimeFav"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_toEndOf="@+id/vanTijd" />
+
+    <ImageButton
+        android:layout_marginEnd="10dp"
+        android:id="@+id/editStartTimeFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mode_edit_black_24dp"
+        android:contentDescription="@string/edit_fav_start"
+        android:layout_alignTop="@+id/timeHeaderDivider"
+        android:layout_alignParentEnd="true" />
+
+    <!-- End time -->
+    <ImageView
+        android:id="@+id/favEndIcon"
+        android:layout_marginStart="10dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_star_rate_black_18dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/favStartIcon"
+        android:layout_alignTop="@+id/editEndTimeFav"
+        android:layout_alignBottom="@+id/editEndTimeFav"/>
+
+    <TextView
+        android:text="@string/fav_endtime"
+        android:id="@+id/totTijd"
+        android:layout_width="150dp"
+        android:gravity="center_vertical"
+        android:layout_toEndOf="@id/favEndIcon"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editStartTimeFav"
+        android:layout_alignTop="@+id/editEndTimeFav"
+        android:layout_alignBottom="@+id/editEndTimeFav"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_setting"
+        android:id="@+id/txtEndTime"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/editStartTimeFav"
+        android:layout_alignTop="@+id/editEndTimeFav"
+        android:layout_alignBottom="@+id/editEndTimeFav"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_toEndOf="@+id/totTijd" />
+
+    <ImageButton
+        android:layout_marginEnd="10dp"
+        android:id="@+id/editEndTimeFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mode_edit_black_24dp"
+        android:contentDescription="@string/edit_fav_end"
+        android:layout_below="@+id/editStartTimeFav"
+        android:layout_alignParentEnd="true" />
+
+    <!-- Date header and line -->
+    <TextView
+        android:id="@+id/dateHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:layout_marginStart="10dp"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_below="@+id/totTijd" />
+
+    <View
+        android:id="@+id/dateHeaderDivider"
+        android:layout_below="@+id/dateHeader"
+        android:layout_marginBottom="10dp"
+        style="@style/Divider"
+        />
+
+    <!-- Date settings -->
+    <TextView
+        android:text="@string/date_format"
+        android:id="@+id/dateFormat"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/totTijd"
+        android:layout_below="@+id/dateHeader"
         android:layout_alignParentStart="true" />
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="dd-MM-yyyy"
+        android:text="@string/day_first_date"
         android:id="@+id/rbDayFirst"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/favEndTimeHour"
-        android:layout_toEndOf="@+id/textView"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/dateFormat"
+        android:layout_alignStart="@+id/dateFormat" />
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MM-dd-yyyy"
+        android:text="@string/month_first_date"
         android:id="@+id/rbMonthFirst"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/rbDayFirst"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/textView"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:layout_alignStart="@+id/dateFormat" />
+
+    <!-- Line, cancel and save button -->
+    <View
+        android:id="@+id/dateDivider"
+        android:layout_below="@+id/rbMonthFirst"
+        android:layout_marginBottom="10dp"
+        style="@style/Divider"
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -147,7 +185,8 @@
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             android:id="@+id/btnCancel"
-            android:onClick="onCancelClick"/>
+            android:onClick="onCancelClick"
+            style="?android:attr/buttonStyle"/>
 
         <Button
             android:layout_weight="0.5"
@@ -155,9 +194,8 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:id="@+id/btnSave"
-            android:onClick="onSaveClick"/>
+            android:onClick="onSaveClick"
+            style="?android:attr/buttonStyle"/>
     </LinearLayout>
-
-
 
 </RelativeLayout>

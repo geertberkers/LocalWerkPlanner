@@ -20,7 +20,7 @@
     <string name="planner">Planning</string>
     <string name="history">Gewerkt</string>
     <string name="info">Info</string>
-    <string name="info_popup">Simpele werk planner!\nVersie: 1.0.1\nOntwikkelaar: Geert Berkers</string>
+    <string name="info_popup">Simpele werk planner!\nVersie: 1.0.2\nOntwikkelaar: Geert Berkers</string>
     <string name="settings">Instellingen</string>
     <string name="not_worked_yet">Nog niet gewerkt!</string>
     <string name="no_work_added">Nog geen werk toegevoegd!</string>
@@ -38,6 +38,14 @@
     <string name="work_added">Werk toegevoegen gelukt!</string>
     <string name="date_exists">Werk met deze datum bestaat al!</string>
     <string name="setting_saved">Instellingen opgeslagen!</string>
+    <string name="fav_endtime">Eind tijd:</string>
+    <string name="fav_starttime">Start tijd:</string>
+    <string name="date_format">Formaat:</string>
+    <string name="time">Tijd:</string>
+    <string name="changes_found">Aanpassingen gevonden!</string>
+    <string name="save_changes">Veranderingen opslaan?</string>
+    <string name="edit_fav_start">Pas favoriete starttijd aan</string>
+    <string name="edit_fav_end">Pas favoriete eindtijd aan</string>
 
     <string-array name="menu">
         <item>Planning</item>

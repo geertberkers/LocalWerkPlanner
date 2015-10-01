@@ -1,8 +1,9 @@
 package geert.berkers.localwerkplanner;
 
-import android.content.Context;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
@@ -10,12 +11,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.Surface;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 /**
@@ -26,37 +27,40 @@ public class WorkEditor extends ActionBarActivity {
     private Work workToEdit;
     private Button btnAddWork;
     private Button btnAddExtraWork;
+    private SharedPreferences sharedPref;
 
-    private EditText dayPicker;
-    private EditText monthPicker;
-    private EditText yearPicker;
+    private TextView date;
+    private TextView startTime;
+    private TextView endTime;
 
-    private EditText startHourPicker;
-    private EditText startMinutePicker;
+    private ImageButton editDate;
+    private ImageButton editStartTime;
+    private ImageButton editEndTime;
 
-    private EditText endHourPicker;
-    private EditText endMinutePicker;
+    private String startTimeS;
+    private String endTimeS;
 
-    private String dayS;
-    private String monthS;
-    private String yearS;
-    private String startHourS;
-    private String startMinuteS;
-    private String endHourS;
-    private String endMinuteS;
+    private String dateFormat;
+
+    private static final int TIME_DIALOG_END = 777;
+    private static final int TIME_DIALOG_START = 888;
+    private static final int TIME_DIALOG_DATE = 999;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.work_editor_layout);
 
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        dateFormat = sharedPref.getString("dateFormat", "dd-MM-yyy");
+
         setActionbar();
         initControls();
-        setOnfocusChangedListeners();
         setWorkToEdit();
+        setOnClickListeners();
     }
 
-    public void setActionbar() {
+    private void setActionbar() {
         setTitle(getString(R.string.add_job));
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -64,38 +68,30 @@ public class WorkEditor extends ActionBarActivity {
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
     }
 
-    public void initControls() {
+    private void initControls() {
         btnAddWork = (Button) findViewById(R.id.btnAddWork);
         btnAddExtraWork = (Button) findViewById(R.id.btnAddExtraWork);
 
-        dayPicker = (EditText) findViewById(R.id.dayPicker);
-        monthPicker = (EditText) findViewById(R.id.monthPicker);
-        yearPicker = (EditText) findViewById(R.id.yearPicker);
+        date = (TextView) findViewById(R.id.txtDatumValue);
+        endTime = (TextView) findViewById(R.id.txtEndTime);
+        startTime = (TextView) findViewById(R.id.txtStartTime);
 
-        startHourPicker = (EditText) findViewById(R.id.startHourPicker);
-        startMinutePicker = (EditText) findViewById(R.id.startMinutePicker);
-
-        endHourPicker = (EditText) findViewById(R.id.endHourPicker);
-        endMinutePicker = (EditText) findViewById(R.id.endMinutePicker);
+        editDate = (ImageButton) findViewById(R.id.editDate);
+        editEndTime = (ImageButton) findViewById(R.id.editEndTime);
+        editStartTime = (ImageButton) findViewById(R.id.editStartTime);
     }
 
-    public void setWorkToEdit() {
+    private void setWorkToEdit() {
         Bundle b = getIntent().getExtras();
-
-        final SharedPreferences sharedPref= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
-        String dateFormat = sharedPref.getString("dateFormat", "dd-MM-yyy");
 
         try {
             workToEdit = b.getParcelable("workParcelable");
             if (workToEdit != null) {
-                dayPicker.setText(workToEdit.getWorkString(dateFormat).substring(0, 2));
-                monthPicker.setText(workToEdit.getWorkString(dateFormat).substring(3, 5));
-                yearPicker.setText(workToEdit.getWorkString(dateFormat).substring(6, 10));
-                startHourPicker.setText(workToEdit.getStartTime().substring(0, 2));
-                startMinutePicker.setText(workToEdit.getStartTime().substring(3, 5));
-                endHourPicker.setText(workToEdit.getEndTime().substring(0, 2));
-                endMinutePicker.setText(workToEdit.getEndTime().substring(3, 5));
+                String dateString = workToEdit.getWorkString(dateFormat);
+
+                date.setText(dateString.substring(0, 10));
+                startTime.setText(dateString.substring(17, 22));
+                endTime.setText(dateString.substring(23, 28));
 
                 btnAddWork.setText(R.string.change_job);
                 btnAddExtraWork.setVisibility(View.INVISIBLE);
@@ -121,25 +117,18 @@ public class WorkEditor extends ActionBarActivity {
 
             switch (dateFormat){
                 case "dd-MM-yyyy":
-                    dayPicker.setText(String.valueOf(sDay));
-                    monthPicker.setText(String.valueOf(sMonth));
+                    date.setText(sDay + "-" + sMonth + "-" + sYear);
                     break;
                 case "MM-dd-yyyy":
-                    dayPicker.setText(String.valueOf(sMonth));
-                    monthPicker.setText(String.valueOf(sDay));
+                    date.setText(sMonth + "-" + sDay + "-" + sYear);
                     break;
             }
-            yearPicker.setText(String.valueOf(sYear));
 
-            startHourS  =  sharedPref.getString("fav_start_time_hour", "18");
-            startMinuteS  =  sharedPref.getString("fav_start_time_minute", "00");
-            endHourS  =  sharedPref.getString("fav_end_time_hour", "20");
-            endMinuteS  =  sharedPref.getString("fav_end_time_minute", "30");
+            endTimeS = sharedPref.getString("fav_end_time_hour", "20") + ":" + sharedPref.getString("fav_end_time_minute", "30");
+            startTimeS = sharedPref.getString("fav_start_time_hour", "18") + ":" + sharedPref.getString("fav_start_time_minute", "00");
 
-            startHourPicker.setText(startHourS);
-            startMinutePicker.setText(startMinuteS);
-            endHourPicker.setText(endHourS);
-            endMinutePicker.setText(endMinuteS);
+            endTime.setText(endTimeS);
+            startTime.setText(startTimeS);
 
             btnAddExtraWork.setVisibility(View.VISIBLE);
 
@@ -147,15 +136,8 @@ public class WorkEditor extends ActionBarActivity {
         }
         finally {
             try {
-                if(!dayPicker.getText().toString().isEmpty()) {
-                    dayS = dayPicker.getText().toString();
-                }
-                monthS = monthPicker.getText().toString();
-                yearS = yearPicker.getText().toString();
-                startHourS = startHourPicker.getText().toString();
-                startMinuteS = startMinutePicker.getText().toString();
-                endHourS = endHourPicker.getText().toString();
-                endMinuteS = endMinutePicker.getText().toString();
+                endTimeS = endTime.getText().toString();
+                startTimeS = startTime.getText().toString();
             }
             catch (Exception ex){
                 ex.printStackTrace();
@@ -163,127 +145,35 @@ public class WorkEditor extends ActionBarActivity {
         }
     }
 
-    public void setOnfocusChangedListeners() {
-        dayPicker.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (!dayPicker.getText().toString().isEmpty()) {
-                    dayS = dayPicker.getText().toString();
-                }
-                restoreNumber();
-                dayPicker.setText("");
-                return false;
-            }
-        });
-        monthPicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    monthS = monthPicker.getText().toString();
-                    restoreNumber();
-                    monthPicker.setText("");
-                }}});
-        yearPicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    yearS = yearPicker.getText().toString();
-                    restoreNumber();
-                    yearPicker.setText("");
-                }}});
-        startHourPicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    startHourS = startHourPicker.getText().toString();
-                    restoreNumber();
-                    startHourPicker.setText("");
-                }}});
-        startMinutePicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    startMinuteS = startMinutePicker.getText().toString();
-                    restoreNumber();
-                    startMinutePicker.setText("");
-                }}});
-        endHourPicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    endHourS = endHourPicker.getText().toString();
-                    restoreNumber();
-                    endHourPicker.setText("");
-                }}});
-        endMinutePicker.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    endMinuteS = endMinutePicker.getText().toString();
-                    restoreNumber();
-                    endMinutePicker.setText("");
-                }}});
-    }
-
-    public void restoreNumber() {
-        if(dayPicker.getText().toString().isEmpty()){
-            dayPicker.setText(dayS);
-        }
-        if(monthPicker.getText().toString().isEmpty()){
-            monthPicker.setText(monthS);
-        }
-        if(yearPicker.getText().toString().isEmpty()){
-            yearPicker.setText(yearS);
-        }
-        if(startHourPicker.getText().toString().isEmpty()){
-            startHourPicker.setText(startHourS);
-        }
-        if(startMinutePicker.getText().toString().isEmpty()){
-            startMinutePicker.setText(startMinuteS);
-        }
-        if(endHourPicker.getText().toString().isEmpty()){
-            endHourPicker.setText(endHourS);
-        }
-        if(endMinutePicker.getText().toString().isEmpty()){
-            endMinutePicker.setText(endMinuteS);
-        }
-    }
-
     public void addWork(View view) {
-        String year = yearPicker.getText().toString();
-        String month = monthPicker.getText().toString();
-        String day = dayPicker.getText().toString();
+
+        String month;
+        String day;
+
+        if(dateFormat.equals("MM-dd-yyyy")) {
+            month = date.getText().toString().substring(0,2);
+            day = date.getText().toString().substring(3,5);
+        } else {
+            month = date.getText().toString().substring(3, 5);
+            day = date.getText().toString().substring(0, 2);
+        }
+
+        String year = date.getText().toString().substring(6, 10);
 
         if (day.length() == 1) { day = "0" + day; }
         if (month.length() == 1) { month = "0" + month; }
 
-        String startHour = startHourPicker.getText().toString();
-        String startMinute = startMinutePicker.getText().toString();
+        startTimeS = startTime.getText().toString();
+        endTimeS = endTime.getText().toString();
 
-        if (startHour.length() == 1) { startHour = "0" + startHour; }
-        if (startMinute.length() == 1) { startMinute = "0" + startMinute; }
 
-        String endHour = endHourPicker.getText().toString();
-        String endMinute = endMinutePicker.getText().toString();
-
-        if (endHour.length() == 1) { endHour = "0" + endHour; }
-        if (endMinute.length() == 1) { endMinute = "0" + endMinute; }
-
-        if(oneFieldIsNull()){
-            Toast.makeText(this, R.string.empte_field, Toast.LENGTH_LONG).show();
-        }else if(!checkIfDateCorrect()){
-            Toast.makeText(this, R.string.incorrect_date, Toast.LENGTH_LONG).show();
-        } else if(Integer.valueOf(startHour) > 23 || Integer.valueOf(startMinute) > 59) {
-            Toast.makeText(this, R.string.starttime_error, Toast.LENGTH_LONG).show();
-        } else if(Integer.valueOf(endHour) > 23 || Integer.valueOf(endMinute) > 59) {
-            Toast.makeText(this, R.string.endtime_error, Toast.LENGTH_LONG).show();
-        } else if (Integer.valueOf((startHour + startMinute)) > Integer.valueOf((endHour + endHour)) ){
+        if (Integer.valueOf((startTimeS.substring(0,2) + startTimeS.substring(3,5))) > Integer.valueOf((endTimeS.substring(0, 2) + endTimeS.substring(3,5)))) {
             Toast.makeText(this, R.string.start_after_end, Toast.LENGTH_LONG).show();
         } else {
             MySQLiteHelper db = new MySQLiteHelper(this);
+
             Work workInDatabase = db.getWork(day + "-" + month + "-" + year);
-            String date = day + "-" + month + "-" + year;
-            Work newWork = new Work(MainActivity.parseDate(date), startHour + ":" + startMinute, endHour + ":" + endMinute);
+            Work newWork = new Work(MainActivity.parseDate(day + "-" + month + "-" + year), startTimeS, endTimeS);
 
             if (workToEdit == null) {
                 if (workInDatabase == null) {
@@ -313,47 +203,6 @@ public class WorkEditor extends ActionBarActivity {
         }
     }
 
-    private boolean oneFieldIsNull() {
-        return dayPicker.getText().toString().isEmpty() || monthPicker.getText().toString().isEmpty() || yearPicker.getText().toString().isEmpty() ||
-                startHourPicker.getText().toString().isEmpty() || startMinutePicker.getText().toString().isEmpty()
-                || endHourPicker.getText().toString().isEmpty() || endMinutePicker.getText().toString().isEmpty();
-    }
-
-    private boolean checkIfDateCorrect() {
-        boolean correct = false;
-        try{
-            int day = Integer.valueOf(dayPicker.getText().toString());
-            int month = Integer.valueOf(monthPicker.getText().toString());
-            int year = Integer.valueOf(yearPicker.getText().toString());
-            if(year > 2014){
-                switch (month) {
-                    case 1:
-                    case 3:
-                    case 7:
-                    case 8:
-                    case 10:
-                    case 12: if(day < 32){ correct = true; } break;
-
-                    case 4:
-                    case 6:
-                    case 9:
-                    case 11: if(day < 31){ correct = true; } break;
-
-                    case 2:
-                        if((year%400==0 || year%100!=0) && (year%4==0)) {
-                            if(day < 30){ correct = true; }
-                        } else {
-                            if(day < 29){ correct = true; }
-                        }
-                        break;
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println("Date incorrect");
-        }
-        return correct;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -364,4 +213,160 @@ public class WorkEditor extends ActionBarActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void setOnClickListeners(){
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_DATE);
+            }
+        });
+
+        startTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_START);
+            }
+        });
+
+        endTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_END);
+            }
+        });
+
+        editStartTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_START);
+            }
+        });
+
+        editEndTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_END);
+            }
+        });
+
+        editDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_DIALOG_DATE);
+            }
+        });
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+        int startHour;
+        int startMinute;
+        int endHour;
+        int endMinute;
+
+        try { startHour = Integer.valueOf(startTimeS.substring(0,2)); }
+        catch(Exception ex) { startHour = Integer.valueOf(startTimeS.substring(0,1)); }
+
+        try { startMinute = Integer.valueOf(startTimeS.substring(3,5)); }
+        catch(Exception ex) { startMinute = Integer.valueOf(startTimeS.substring(3,4)); }
+
+        try { endHour = Integer.valueOf(endTimeS.substring(0,2)); }
+        catch(Exception ex) { endHour = Integer.valueOf(endTimeS.substring(0,1)); }
+
+        try { endMinute = Integer.valueOf(startTimeS.substring(3,5)); }
+        catch(Exception ex) { endMinute = Integer.valueOf(endTimeS.substring(3,4)); }
+
+        String month;
+        String day;
+
+        if(dateFormat.equals("MM-dd-yyyy")) {
+            month = date.getText().toString().substring(0,2);
+            day = date.getText().toString().substring(3,5);
+        } else {
+            month = date.getText().toString().substring(3, 5);
+            day = date.getText().toString().substring(0, 2);
+        }
+
+        String year = date.getText().toString().substring(6, 10);
+
+        int dayInt;
+        int monthInt;
+        int yearInt = Integer.valueOf(year);
+
+        try { dayInt = Integer.valueOf(day); }
+        catch(Exception ex) { dayInt = Integer.valueOf(day.substring(0,1)); }
+
+        try { monthInt = Integer.valueOf(month); }
+        catch(Exception ex) { monthInt = Integer.valueOf(month.substring(0,1)); }
+
+        switch (id) {
+            case TIME_DIALOG_START:
+                return new TimePickerDialog(this, startTimePickerListener, startHour, startMinute, true);
+            case TIME_DIALOG_END:
+                return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, true);
+            case TIME_DIALOG_DATE:
+                return new DatePickerDialog(this, datePickerListener, yearInt, monthInt, dayInt);
+        }
+        return null;
+    }
+
+    private final TimePickerDialog.OnTimeSetListener startTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+            String favStartHour;
+            String favStartMinute;
+
+            if(selectedHour < 10){
+                favStartHour = "0" + selectedHour;
+            } else { favStartHour = String.valueOf(selectedHour); }
+            if(selectedMinute < 10) {
+                favStartMinute = "0"+ selectedMinute;
+            } else { favStartMinute = String.valueOf(selectedMinute); }
+            startTime.setText(new StringBuilder().append(favStartHour).append(":").append(favStartMinute));
+        }
+    };
+
+    private final TimePickerDialog.OnTimeSetListener endTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
+            String favEndHour;
+            String favEndMinute;
+
+            if(selectedHour < 10){
+                favEndHour = "0" + selectedHour;
+            } else { favEndHour = String.valueOf(selectedHour); }
+
+            if(selectedMinute < 10) {
+                favEndMinute = "0"+ selectedMinute;
+            } else { favEndMinute = String.valueOf(selectedMinute); }
+
+            endTime.setText(new StringBuilder().append(favEndHour).append(":").append(favEndMinute));
+        }
+    };
+
+    private final DatePickerDialog.OnDateSetListener datePickerListener =  new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            String month;
+            String day;
+
+            if(monthOfYear < 10){
+                month = "0" + monthOfYear;
+            } else { month = String.valueOf(monthOfYear); }
+
+            if(dayOfMonth < 10) {
+                day = "0"+ dayOfMonth;
+            } else { day = String.valueOf(dayOfMonth); }
+
+            switch (dateFormat){
+                case "MM-dd-yyyy":
+                    date.setText(new StringBuilder().append(month).append("-").append(day).append("-").append(year));
+                    break;
+                case "dd-MM-yyyy":
+                    date.setText(new StringBuilder().append(day).append("-").append(month).append("-").append(year));
+                    break;
+            }
+        }
+    };
 }

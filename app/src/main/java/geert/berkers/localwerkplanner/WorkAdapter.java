@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by Geert on 11-9-2015
  */
 
-public class WorkAdapter extends BaseAdapter {
+class WorkAdapter extends BaseAdapter {
     private Context context;
 
     private Activity activity;

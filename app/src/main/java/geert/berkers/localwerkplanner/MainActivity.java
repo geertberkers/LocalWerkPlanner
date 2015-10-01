@@ -89,7 +89,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         }
     }
 
-    public void selectItem(int position) {
+    private void selectItem(int position) {
         listView.setItemChecked(position, true);
 
         if (menuAdapter.getItem(position).equals(getString(R.string.planner))) {
@@ -119,7 +119,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         }
     }
 
-    public void showWork(boolean past) {
+    private void showWork(boolean past) {
         mSwipeRefreshLayout.setRefreshing(false);
         if (past) {
             emptyTextView.setText(R.string.not_worked_yet);
@@ -203,7 +203,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         getWorkFromDatabase();
     }
 
-    public void getWorkFromDatabase() {
+    private void getWorkFromDatabase() {
         workList = db.getAllWorks();
 
         if (getTitle().toString().equals(getString(R.string.history))) {

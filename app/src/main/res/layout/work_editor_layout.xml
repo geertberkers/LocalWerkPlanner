@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<!--
     <LinearLayout
         android:id="@+id/firstWorkAdder"
         android:orientation="vertical"
@@ -13,90 +13,47 @@
 
         <RelativeLayout
             android:id="@+id/datumLayout"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content">-->
 
+            <!-- Date -->
             <TextView
                 android:text="@string/date"
                 android:id="@+id/txtDatum"
                 android:layout_marginStart="20dp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
-
-            <EditText
-                android:gravity="center"
-                android:singleLine="true"
-                android:id="@+id/dayPicker"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/txtDatum"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="15" />
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:layout_alignTop="@+id/editDate"
+                android:layout_alignBottom="@+id/editDate"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
-                android:id="@+id/lineMonth"
-                android:text="@string/line"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/dayPicker"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
-                android:singleLine="true"
-                android:layout_width="50dp"
-                android:id="@+id/monthPicker"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/lineMonth"
-                android:gravity="center"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="09" />
-
-            <TextView
-                android:id="@+id/lineYear"
-                android:text="@string/line"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/monthPicker"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-            <EditText
-                android:id="@+id/yearPicker"
+                android:text="@string/day_first_date"
+                android:id="@+id/txtDatumValue"
+                android:gravity="center_vertical"
+                android:layout_toEndOf="@id/txtDatum"
+                android:layout_alignTop="@+id/editDate"
+                android:layout_alignBottom="@+id/editDate"
                 android:layout_marginEnd="20dp"
-                android:layout_width="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ImageButton
+                android:id="@+id/editDate"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/lineYear"
-                android:singleLine="true"
-                android:gravity="center"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="4"
-                android:text="2015" />
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                android:contentDescription="@string/edit_fav_start"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
 
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/vanTijdLayout"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
+            <!-- From time -->
             <TextView
                 android:text="@string/van"
                 android:id="@+id/vanTijd"
@@ -104,53 +61,36 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_alignParentStart="true" />
-
-            <EditText
-                android:layout_width="50dp"
-                android:id="@+id/startHourPicker"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/vanTijd"
-                android:singleLine="true"
-                android:gravity="center"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="18" />
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:layout_below="@id/editDate"
+                android:layout_alignTop="@+id/editStartTime"
+                android:layout_alignBottom="@+id/editStartTime"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <TextView
-                android:text="@string/douplePoint"
-                android:id="@+id/vanTijdSeperator"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/startHourPicker"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text="@string/time_setting"
+                android:id="@+id/txtStartTime"
+                android:layout_toEndOf="@+id/vanTijd"
+                android:gravity="center_vertical"
+                android:layout_below="@id/editDate"
+                android:layout_alignTop="@+id/editStartTime"
+                android:layout_alignBottom="@+id/editStartTime"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
 
-            <EditText
-                android:layout_width="50dp"
-                android:id="@+id/startMinutePicker"
+            <ImageButton
+                android:id="@+id/editStartTime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/vanTijdSeperator"
-                android:singleLine="true"
-                android:gravity="center"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="00" />
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                android:contentDescription="@string/edit_fav_start"
+                android:layout_below="@+id/editDate"
+                android:layout_alignParentEnd="true" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/totTijdLayout"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
+            <!-- End time -->
             <TextView
                 android:text="@string/tot"
                 android:id="@+id/totTijd"
@@ -158,47 +98,35 @@
                 android:layout_marginStart="20dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/editStartTime"
+                android:layout_alignTop="@+id/editEndTime"
+                android:layout_alignBottom="@+id/editEndTime"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <EditText
-                android:layout_width="50dp"
-                android:id="@+id/endHourPicker"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/totTijd"
-                android:singleLine="true"
-                android:gravity="center"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="20" />
 
             <TextView
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:text="@string/douplePoint"
-                android:id="@+id/totTijdSeperator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/endHourPicker"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text="@string/time_setting"
+                android:id="@+id/txtEndTime"
+                android:gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceLarge"
 
-            <EditText
-                android:layout_width="50dp"
-                android:layout_marginEnd="20dp"
-                android:id="@+id/endMinutePicker"
+                android:layout_alignTop="@+id/editEndTime"
+                android:layout_alignBottom="@+id/editEndTime"
+                android:layout_toEndOf="@+id/totTijd" />
+
+            <ImageButton
+                android:id="@+id/editEndTime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="false"
-                android:singleLine="true"
-                android:gravity="center"
-                android:layout_toEndOf="@id/totTijdSeperator"
-                android:digits="0123456789"
-                android:inputType="number"
-                android:maxLength="2"
-                android:text="30" />
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                android:contentDescription="@string/edit_fav_start"
+                android:layout_below="@+id/editStartTime"
+                android:layout_alignParentEnd="true" />
 
-        </RelativeLayout>
-    </LinearLayout>
+        <!--</RelativeLayout>
+    </LinearLayout>-->
 
     <Button
         android:onClick="addWork"
@@ -207,7 +135,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/firstWorkAdder"
+        android:layout_below="@+id/editEndTime"
         android:layout_alignEnd="@+id/btnAddExtraWork"
         android:layout_alignStart="@+id/btnAddExtraWork" />
 

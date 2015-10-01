@@ -1,12 +1,9 @@
 package geert.berkers.localwerkplanner;
 
-import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -93,7 +90,7 @@ public class Work implements Parcelable, Comparable<Work>{
         return past;
     }
 
-    public Work(Parcel read){
+    private Work(Parcel read){
         this.past = false;
         this.date = MainActivity.parseDate(read.readString());
         this.dayOfWeek = read.readString();
