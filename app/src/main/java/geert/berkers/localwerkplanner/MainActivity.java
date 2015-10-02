@@ -237,7 +237,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 returnString = startHour + ":" + originalTime.substring(3,5);
             }
             else {
-                returnString = startHour + ":" + originalTime.substring(3,5);
+                returnString = originalTime;
             }
 
 

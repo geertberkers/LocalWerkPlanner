@@ -394,9 +394,9 @@ public class SettingsActivity extends ActionBarActivity {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case TIME_DIALOG_START:
-                return new TimePickerDialog(this, startTimePickerListener, startHour, startMinute, rbAMPM.isChecked());
+                return new TimePickerDialog(this, startTimePickerListener, startHour, startMinute, !rbAMPM.isChecked());
             case TIME_DIALOG_END:
-                return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, rbAMPM.isChecked());
+                return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, !rbAMPM.isChecked());
         }
         return null;
     }

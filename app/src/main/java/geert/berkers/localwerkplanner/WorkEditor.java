@@ -52,7 +52,7 @@ public class WorkEditor extends ActionBarActivity {
         setContentView(R.layout.work_editor_layout);
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        dateFormat = sharedPref.getString("dateFormat", "dd-MM-yyy");
+        dateFormat = sharedPref.getString("dateFormat", "dd-MM-yyyy");
 
         setActionbar();
         initControls();
