@@ -71,7 +71,6 @@ public class Work implements Parcelable, Comparable<Work>{
     }
 
     public String getWorkString(String dateFormat) {
-
         DateFormat showDateFormat = new SimpleDateFormat(dateFormat);
         return showDateFormat.format(date) + "       " + startTime + "-" + endTime;
     }

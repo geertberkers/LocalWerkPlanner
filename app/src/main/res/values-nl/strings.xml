@@ -39,6 +39,10 @@
     <string name="save_changes">Veranderingen opslaan?</string>
     <string name="edit_fav_start">Pas favoriete starttijd aan</string>
     <string name="edit_fav_end">Pas favoriete eindtijd aan</string>
+    <string name="notation">Notatie:</string>
+    <string name="favorite">Favoriete:</string>
+    <string name="fav_icon">Favoriet icon</string>
+    <string name="not_icon">Notatie icon</string>
 
     <string-array name="menu">
         <item>Planning</item>

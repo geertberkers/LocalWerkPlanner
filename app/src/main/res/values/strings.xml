@@ -42,6 +42,9 @@
     <string name="time_setting" translatable="false">HH:mm</string>
     <string name="edit_fav_start">Edit favorite starttime</string>
     <string name="edit_fav_end">Edit favorite endtime</string>
+    <string name="notation">Notation:</string>
+    <string name="ampm" translatable="false">AM/PM</string>
+    <string name="h24" translatable="false">24H</string>
 
     <string-array name="menu">
         <item>Planner</item>
@@ -54,6 +57,9 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <string name="favorite">Favorite:</string>
+    <string name="fav_icon">Favorite icon</string>
+    <string name="not_icon">Notation icon</string>
 
 
 </resources>
