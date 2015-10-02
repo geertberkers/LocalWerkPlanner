@@ -178,7 +178,7 @@ public class SettingsActivity extends ActionBarActivity {
 
     public void onCancelClick(View v) {
         if (settingsChanged()) {
-            final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(R.string.changes_found);
             alertDialog.setMessage(R.string.save_changes);
             alertDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -251,18 +251,23 @@ public class SettingsActivity extends ActionBarActivity {
     private final TimePickerDialog.OnTimeSetListener startTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             if(selectedHour < 10){
+                startHour = selectedHour;
+                startMinute = selectedMinute;
                 favStartHour = "0" + selectedHour;
             } else { favStartHour = String.valueOf(selectedHour); }
             if(selectedMinute < 10) {
                 favStartMinute = "0"+ selectedMinute;
             } else { favStartMinute = String.valueOf(selectedMinute); }
             startTime.setText(new StringBuilder().append(favStartHour).append(":").append(favStartMinute));
+            removeDialog(TIME_DIALOG_START);
         }
     };
 
     private final TimePickerDialog.OnTimeSetListener endTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             if(selectedHour < 10){
+                endHour = selectedHour;
+                endMinute = selectedMinute;
                 favEndHour = "0" + selectedHour;
             } else { favEndHour = String.valueOf(selectedHour); }
 
@@ -271,6 +276,7 @@ public class SettingsActivity extends ActionBarActivity {
             } else { favEndMinute = String.valueOf(selectedMinute); }
 
             endTime.setText(new StringBuilder().append(favEndHour).append(":").append(favEndMinute));
+            removeDialog(TIME_DIALOG_END);
         }
     };
 }

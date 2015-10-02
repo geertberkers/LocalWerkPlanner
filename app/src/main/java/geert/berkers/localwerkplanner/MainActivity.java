@@ -143,7 +143,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             sortList(tempWorkList);
             this.workListView.setVisibility(View.VISIBLE);
             this.emptyTextView.setVisibility(View.INVISIBLE);
-            WorkAdapter workAdapter = new WorkAdapter(this.getApplicationContext(), tempWorkList, MainActivity.this, listView, emptyTextView);
+            WorkAdapter workAdapter = new WorkAdapter(this.getApplicationContext(), tempWorkList, MainActivity.this, workListView, emptyTextView);
             workListView.setAdapter(workAdapter);
         }
     }

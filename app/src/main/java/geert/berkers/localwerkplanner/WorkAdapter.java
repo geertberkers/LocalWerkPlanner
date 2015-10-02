@@ -30,6 +30,8 @@ class WorkAdapter extends BaseAdapter {
     private ListView listView;
     private TextView emptyTextView;
 
+    private WorkAdapter adapter;
+
     private ArrayList<Work> workList =  new ArrayList<>();
 
     public WorkAdapter(Context context, ArrayList<Work> workList, Activity activity, ListView listView, TextView emptyTextView) {
@@ -38,6 +40,7 @@ class WorkAdapter extends BaseAdapter {
         this.workList = workList;
         this.listView = listView;
         this.emptyTextView = emptyTextView;
+        this.adapter= this;
     }
 
     @Override
@@ -81,23 +84,13 @@ class WorkAdapter extends BaseAdapter {
 
 
         String[] weekendDays = context.getResources().getStringArray(R.array.weekendDays);
-        /*
-        weekendDays.addAll(context.getResources().getStringArray(R.array.weekendDays));
-        weekendDays.add("Zaterdag");
-        weekendDays.add("Saturday");
-        weekendDays.add("Zondag");
-        weekendDays.add("Sunday");
-*/
+
         for(String s : weekendDays){
             if(s.equals(dayOfWeekString)){
                 row.setBackgroundResource(R.color.transBlauw);
             }
         }
-        /*
-        if (weekendDays.(dayOfWeekString)) {
-            row.setBackgroundResource(R.color.transBlauw);
-        }
-*/
+
         editImageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -125,15 +118,13 @@ class WorkAdapter extends BaseAdapter {
                         workList.remove(workList.get(position).getWork());
 
                         if(workList.isEmpty()){
-
                             listView.setVisibility(View.INVISIBLE);
                             emptyTextView.setVisibility(View.VISIBLE);
-                            notifyDataSetChanged();
                         }
                         else {
                             listView.setVisibility(View.VISIBLE);
                             emptyTextView.setVisibility(View.INVISIBLE);
-                            notifyDataSetChanged();
+                            listView.setAdapter(adapter);
                         }
                     }
                 });

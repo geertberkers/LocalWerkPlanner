@@ -44,7 +44,7 @@ public class WorkEditor extends ActionBarActivity {
 
     private static final int TIME_DIALOG_END = 777;
     private static final int TIME_DIALOG_START = 888;
-    private static final int TIME_DIALOG_DATE = 999;
+    private static final int DATE_DIALOG = 999;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,7 +219,7 @@ public class WorkEditor extends ActionBarActivity {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(TIME_DIALOG_DATE);
+                showDialog(DATE_DIALOG);
             }
         });
 
@@ -254,7 +254,7 @@ public class WorkEditor extends ActionBarActivity {
         editDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(TIME_DIALOG_DATE);
+                showDialog(DATE_DIALOG);
             }
         });
     }
@@ -276,7 +276,7 @@ public class WorkEditor extends ActionBarActivity {
         try { endHour = Integer.valueOf(endTimeS.substring(0,2)); }
         catch(Exception ex) { endHour = Integer.valueOf(endTimeS.substring(0,1)); }
 
-        try { endMinute = Integer.valueOf(startTimeS.substring(3,5)); }
+        try { endMinute = Integer.valueOf(endTimeS.substring(3,5)); }
         catch(Exception ex) { endMinute = Integer.valueOf(endTimeS.substring(3,4)); }
 
         String month;
@@ -307,13 +307,13 @@ public class WorkEditor extends ActionBarActivity {
                 return new TimePickerDialog(this, startTimePickerListener, startHour, startMinute, true);
             case TIME_DIALOG_END:
                 return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, true);
-            case TIME_DIALOG_DATE:
-                return new DatePickerDialog(this, datePickerListener, yearInt, monthInt, dayInt);
+            case DATE_DIALOG:
+                return new DatePickerDialog(this, datePickerListener, yearInt, (monthInt-1), dayInt);
         }
         return null;
     }
 
-    private final TimePickerDialog.OnTimeSetListener startTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
+    private TimePickerDialog.OnTimeSetListener startTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             String favStartHour;
             String favStartMinute;
@@ -324,11 +324,13 @@ public class WorkEditor extends ActionBarActivity {
             if(selectedMinute < 10) {
                 favStartMinute = "0"+ selectedMinute;
             } else { favStartMinute = String.valueOf(selectedMinute); }
-            startTime.setText(new StringBuilder().append(favStartHour).append(":").append(favStartMinute));
+            startTimeS = favStartHour + ":" + favStartMinute;
+            startTime.setText(startTimeS);
+            removeDialog(TIME_DIALOG_START);
         }
     };
 
-    private final TimePickerDialog.OnTimeSetListener endTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
+    private TimePickerDialog.OnTimeSetListener endTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             String favEndHour;
             String favEndMinute;
@@ -341,13 +343,16 @@ public class WorkEditor extends ActionBarActivity {
                 favEndMinute = "0"+ selectedMinute;
             } else { favEndMinute = String.valueOf(selectedMinute); }
 
-            endTime.setText(new StringBuilder().append(favEndHour).append(":").append(favEndMinute));
+            endTimeS = favEndHour + ":" + favEndMinute;
+            endTime.setText(endTimeS);
+            removeDialog(TIME_DIALOG_END);
         }
     };
 
     private final DatePickerDialog.OnDateSetListener datePickerListener =  new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            monthOfYear++;
             String month;
             String day;
 
@@ -359,6 +364,7 @@ public class WorkEditor extends ActionBarActivity {
                 day = "0"+ dayOfMonth;
             } else { day = String.valueOf(dayOfMonth); }
 
+
             switch (dateFormat){
                 case "MM-dd-yyyy":
                     date.setText(new StringBuilder().append(month).append("-").append(day).append("-").append(year));
@@ -367,6 +373,7 @@ public class WorkEditor extends ActionBarActivity {
                     date.setText(new StringBuilder().append(day).append("-").append(month).append("-").append(year));
                     break;
             }
+            removeDialog(DATE_DIALOG);
         }
     };
 }

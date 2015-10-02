@@ -9,12 +9,9 @@
     <string name="addJob">Voeg werk toe!</string>
     <string name="date">Datum:</string>
     <string name="van">Van:</string>
-    <string name="douplePoint">:</string>
     <string name="tot">Tot:</string>
-    <string name="line">-</string>
     <string name="noWork">Nog geen werk toegevoegd!</string>
     <string name="addMoreJobs">Voeg meer werkdagen toe!</string>
-    <string name="testSetting">Test settings</string>
     <string name="cancel">Annuleren</string>
     <string name="save">Opslaan</string>
     <string name="planner">Planning</string>
@@ -30,10 +27,6 @@
     <string name="no">Nee</string>
     <string name="add_job">Werk toevoegen</string>
     <string name="change_job">Werk aanpassen!</string>
-    <string name="empte_field">Voer alle velden in!</string>
-    <string name="incorrect_date">Datum niet goed ingevoerd!</string>
-    <string name="starttime_error">Starttijd niet goed ingevoerd!</string>
-    <string name="endtime_error">Eindtijd niet goed ingevoerd!</string>
     <string name="start_after_end">Starttijd kan niet na eindtijd!</string>
     <string name="work_added">Werk toegevoegen gelukt!</string>
     <string name="date_exists">Werk met deze datum bestaat al!</string>

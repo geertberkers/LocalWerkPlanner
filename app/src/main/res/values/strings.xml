@@ -9,12 +9,9 @@
     <string name="addJob">Add job!</string>
     <string name="date">Date:</string>
     <string name="van">From:</string>
-    <string name="douplePoint">:</string>
     <string name="tot">Till:</string>
-    <string name="line">-</string>
     <string name="noWork">Still no jobs added!</string>
     <string name="addMoreJobs">Add more jobs!</string>
-    <string name="testSetting">Test settings</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="planner">Planner</string>
@@ -29,19 +26,11 @@
     <string name="no">No</string>
     <string name="add_job">Add job</string>
     <string name="change_job">Edit job!</string>
-    <string name="empte_field">Fill in all fields!</string>
-    <string name="incorrect_date">Incorrect date!</string>
-    <string name="starttime_error">From time is not correct!</string>
-    <string name="endtime_error">Till time is not correct!</string>
     <string name="start_after_end">From time can not be after till time!</string>
     <string name="work_added">Job added!</string>
     <string name="date_exists">Job with this date already exists!</string>
     <string name="no_work_added">No jobs added!</string>
     <string name="setting_saved">Settings saved!</string>
-    <!--
-    <string name="fav_endtime">Favorite end time:</string>
-    <string name="fav_starttime">Favorite start time:</string>
-    -->
     <string name="fav_endtime">End time:</string>
     <string name="fav_starttime">Start time:</string>
     <string name="day_first_date" translatable="false">dd-MM-yyyy</string>
