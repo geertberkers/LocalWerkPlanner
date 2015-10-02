@@ -56,17 +56,6 @@
         android:layout_toEndOf="@+id/vanTijd"
         android:layout_marginEnd="5dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtAM"
-        android:gravity="center_vertical"
-        android:layout_below="@id/timeHeaderDivider"
-        android:layout_alignTop="@+id/editStartTimeFav"
-        android:layout_alignBottom="@+id/editStartTimeFav"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_toEndOf="@+id/txtStartTime" />
-
     <ImageButton
         android:layout_marginEnd="10dp"
         android:id="@+id/editStartTimeFav"
@@ -76,7 +65,7 @@
         android:contentDescription="@string/edit_fav_start"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/timeHeaderDivider"
-         />
+        />
 
     <!-- End time -->
     <TextView
@@ -104,17 +93,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_toEndOf="@+id/totTijd"
         android:layout_marginEnd="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtAM1"
-        android:gravity="center_vertical"
-        android:layout_below="@+id/editStartTimeFav"
-        android:layout_alignTop="@+id/editEndTimeFav"
-        android:layout_alignBottom="@+id/editEndTimeFav"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_toEndOf="@+id/txtEndTime" />
 
     <ImageButton
         android:layout_marginEnd="10dp"
@@ -153,37 +131,10 @@
     <View
         android:id="@+id/notationHeaderDivider"
         android:layout_below="@+id/dateHeader"
-        android:layout_marginBottom="10dp"
         style="@style/Divider"
         />
 
     <!-- Time notation -->
-    <TextView
-        android:text="@string/time"
-        android:id="@+id/txtNotation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/notationHeaderDivider"
-        android:layout_alignStart="@+id/vanTijd" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/h24"
-        android:id="@+id/rb24H"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignTop="@+id/txtNotation"
-        android:layout_toEndOf="@+id/dateHeader" />
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ampm"
-        android:id="@+id/rbAMPM"
-        android:layout_below="@+id/rb24H"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignStart="@+id/rb24H" />
 
     <!-- Date notation -->
     <TextView
@@ -191,10 +142,10 @@
         android:id="@+id/dateFormat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_below="@+id/rbAMPM"
-        android:layout_alignStart="@+id/vanTijd" />
+        android:layout_alignStart="@+id/vanTijd"
+        android:layout_below="@+id/notationHeaderDivider"
+        android:layout_marginTop="5dp" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -203,7 +154,7 @@
         android:id="@+id/rbDayFirst"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignTop="@+id/dateFormat"
-        android:layout_alignStart="@+id/rbAMPM" />
+        android:layout_toEndOf="@+id/totTijd" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -218,9 +169,8 @@
     <View
         android:id="@+id/dateDivider"
         android:layout_below="@+id/rbMonthFirst"
-        android:layout_marginBottom="10dp"
         style="@style/Divider"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp" />
 
     <LinearLayout
         android:orientation="horizontal"

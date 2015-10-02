@@ -21,13 +21,9 @@ import android.widget.Toast;
  */
 public class SettingsActivity extends ActionBarActivity {
 
-    private TextView txtStartAMPM;
-    private TextView txtEndAMPM;
     private TextView endTime;
     private TextView startTime;
 
-    private RadioButton rb24H;
-    private RadioButton rbAMPM;
     private RadioButton rbDayFirst;
     private RadioButton rbMonthFirst;
 
@@ -51,10 +47,6 @@ public class SettingsActivity extends ActionBarActivity {
     private int endMinute;
 
     private boolean dayfirst;
-    private boolean startAM;
-    private boolean startPM;
-    private boolean endAM;
-    private boolean endPM;
 
     private static final int TIME_DIALOG_END = 888;
     private static final int TIME_DIALOG_START = 999;
@@ -80,10 +72,6 @@ public class SettingsActivity extends ActionBarActivity {
     }
 
     private void initControls() {
-        txtStartAMPM = (TextView) findViewById(R.id.txtAM);
-        txtEndAMPM = (TextView) findViewById(R.id.txtAM1);
-        rb24H = (RadioButton) findViewById(R.id.rb24H);
-        rbAMPM = (RadioButton) findViewById(R.id.rbAMPM);
         endTime = (TextView) findViewById(R.id.txtEndTime);
         startTime = (TextView) findViewById(R.id.txtStartTime);
         rbDayFirst = (RadioButton) findViewById(R.id.rbDayFirst);
@@ -99,67 +87,14 @@ public class SettingsActivity extends ActionBarActivity {
         favEndHour = sharedPref.getString("fav_end_time_hour", "20");
         favEndMinute = sharedPref.getString("fav_end_time_minute", "30");
 
-        startAM = sharedPref.getBoolean("startAM", false);
-        startPM = sharedPref.getBoolean("startPM", false);
-        endAM = sharedPref.getBoolean("endAM", false);
-        endPM = sharedPref.getBoolean("endPM", false);
-
         oldfavStartHour = favStartHour;
         oldfavStartMinute = favStartMinute;
         oldfavEndHour = favEndHour;
         oldfavEndMinute = favEndMinute;
 
-        setRBDate();
-        setRBTimeFormat();
-        setTimes();
-    }
+        endTime.setText(new StringBuilder().append(favEndHour).append(":").append(favEndMinute));
+        startTime.setText(new StringBuilder().append(favStartHour).append(":").append(favStartMinute));
 
-    private void setTimes() {
-        try { startHour = Integer.valueOf(favStartHour); }
-        catch(Exception ex) { startHour = Integer.valueOf(favStartHour.substring(0,1)); }
-
-        try { startMinute = Integer.valueOf(favStartMinute); }
-        catch(Exception ex) { startMinute = Integer.valueOf(favStartMinute.substring(0,1)); }
-
-        try { endHour = Integer.valueOf(favEndHour); }
-        catch(Exception ex) { endHour = Integer.valueOf(favEndHour.substring(0,1)); }
-
-        try { endMinute = Integer.valueOf(favEndMinute); }
-        catch(Exception ex) { endMinute = Integer.valueOf(favEndMinute.substring(0,1)); }
-    }
-
-    private void setRBTimeFormat() {
-
-        if(!startAM && !startPM && !endAM && !endPM){
-            rb24H.setChecked(true);
-            rbAMPM.setChecked(false);
-            endTime.setText(favEndHour + ":" + favEndMinute);
-            startTime.setText(favStartHour + ":" + favStartMinute);
-            txtStartAMPM.setVisibility(View.INVISIBLE);
-            txtEndAMPM.setVisibility(View.INVISIBLE);
-        } else {
-            rb24H.setChecked(false);
-            rbAMPM.setChecked(true);
-            endTime.setText(MainActivity.changeTimeToAMPM(favEndHour + ":" + favEndMinute));
-            startTime.setText(MainActivity.changeTimeToAMPM(favStartHour + ":" + favStartMinute));
-
-            if(startAM){
-                txtStartAMPM.setText("AM");
-            } else {
-                txtStartAMPM.setText("PM");
-            }
-            if(endAM){
-                txtEndAMPM.setText("AM");
-            } else {
-                txtEndAMPM.setText("PM");
-            }
-
-            txtStartAMPM.setVisibility(View.VISIBLE);
-            txtEndAMPM.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void setRBDate() {
         if(rbDayFirst.getText().toString().equals(currentDateFormat)){
             dayfirst = true;
             rbDayFirst.setChecked(true);
@@ -169,64 +104,21 @@ public class SettingsActivity extends ActionBarActivity {
             rbDayFirst.setChecked(false);
             rbMonthFirst.setChecked(true);
         }
+
+        try { startHour = Integer.valueOf(favStartHour); }
+        catch(Exception ex) { startHour = Integer.valueOf(favStartHour.substring(1)); }
+
+        try { startMinute = Integer.valueOf(favStartMinute); }
+        catch(Exception ex) { startMinute = Integer.valueOf(favStartMinute.substring(1)); }
+
+        try { endHour = Integer.valueOf(favEndHour); }
+        catch(Exception ex) { endHour = Integer.valueOf(favEndHour.substring(1)); }
+
+        try { endMinute = Integer.valueOf(favEndMinute); }
+        catch(Exception ex) { endMinute = Integer.valueOf(favEndMinute.substring(1)); }
     }
 
     private void setOnClickListeners(){
-
-        rb24H.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startAM = false;
-                startPM = false;
-                endAM = false;
-                endPM = false;
-
-                rb24H.setChecked(true);
-                rbAMPM.setChecked(false);
-
-                endTime.setText(favEndHour + ":" + favEndMinute);
-                startTime.setText(favStartHour + ":" + favStartMinute);
-
-                txtStartAMPM.setVisibility(View.INVISIBLE);
-                txtEndAMPM.setVisibility(View.INVISIBLE);
-            }
-        });
-        rbAMPM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(startHour > 12) {
-                    startHour = startHour - 12;
-                    startPM = true;
-                    startAM = false;
-                    txtStartAMPM.setText("PM");
-                } else {
-                    startAM = true;
-                    startPM = false;
-                    txtStartAMPM.setText("AM");
-                }
-
-                if(endHour > 12) {
-                    endHour = endHour - 12;
-                    endPM = true;
-                    endAM = false;
-                    txtEndAMPM.setText("PM");
-                } else {
-                    endAM = true;
-                    endPM = false;
-                    txtEndAMPM.setText("AM");
-                }
-
-                rb24H.setChecked(false);
-                rbAMPM.setChecked(true);
-
-                endTime.setText(endHour + ":" + favEndMinute);
-                startTime.setText(startHour + ":" + favStartMinute);
-
-                txtStartAMPM.setVisibility(View.VISIBLE);
-                txtEndAMPM.setVisibility(View.VISIBLE);
-            }
-        });
 
         rbDayFirst.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,14 +169,7 @@ public class SettingsActivity extends ActionBarActivity {
     }
 
     private boolean settingsChanged() {
-        boolean ampm = false;
-
-        if(startPM || startAM || endPM || endAM){
-            ampm = true;
-        }
-
-        if( rbAMPM.isChecked() == ampm
-                && rbDayFirst.isChecked() == dayfirst
+        if(rbDayFirst.isChecked() == dayfirst
                 && oldfavEndHour.equals(endTime.getText().toString().substring(0, 2))
                 && oldfavEndMinute.equals(endTime.getText().toString().substring(3, 5))
                 && oldfavStartHour.equals(startTime.getText().toString().substring(0, 2))
@@ -329,44 +214,10 @@ public class SettingsActivity extends ActionBarActivity {
     private void save() {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.clear();
-
-        if(rbAMPM.isChecked()) {
-            editor.putBoolean("startAM", startAM);
-            editor.putBoolean("startPM", startPM);
-            editor.putBoolean("endAM", endAM);
-            editor.putBoolean("endPM", endPM);
-
-            startHour = Integer.valueOf(favStartHour);
-            if(startAM){
-                System.out.println("startAM " + favStartHour);
-            } else {
-                System.out.println("startPM " + favStartHour);
-                startHour = startHour - 12;
-            }
-
-            endHour = Integer.valueOf(favEndHour);
-            if(endAM){
-                System.out.println("endAM   " + favEndHour);
-            } else {
-                System.out.println("endPM   " + favEndHour);
-                endHour = endHour - 12;
-            }
-
-            editor.putString("fav_start_time_hour", String.valueOf(startHour));
-            editor.putString("fav_start_time_minute", favStartMinute);
-            editor.putString("fav_end_time_hour", String.valueOf(endHour));
-            editor.putString("fav_end_time_minute", favEndMinute);
-        } else {
-            editor.putBoolean("startAM", false);
-            editor.putBoolean("startPM", false);
-            editor.putBoolean("endAM", false);
-            editor.putBoolean("endPM", false);
-
-            editor.putString("fav_start_time_hour", startTime.getText().toString().substring(0, 2));
-            editor.putString("fav_start_time_minute", startTime.getText().toString().substring(3, 5));
-            editor.putString("fav_end_time_hour", endTime.getText().toString().substring(0, 2));
-            editor.putString("fav_end_time_minute", endTime.getText().toString().substring(3, 5));
-        }
+        editor.putString("fav_start_time_hour", startTime.getText().toString().substring(0, 2));
+        editor.putString("fav_start_time_minute",startTime.getText().toString().substring(3, 5));
+        editor.putString("fav_end_time_hour", endTime.getText().toString().substring(0, 2));
+        editor.putString("fav_end_time_minute", endTime.getText().toString().substring(3, 5));
 
         if(rbDayFirst.isChecked()) {
             editor.putString("dateFormat",rbDayFirst.getText().toString());
@@ -394,9 +245,9 @@ public class SettingsActivity extends ActionBarActivity {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case TIME_DIALOG_START:
-                return new TimePickerDialog(this, startTimePickerListener, startHour, startMinute, !rbAMPM.isChecked());
+                return new TimePickerDialog(this, startTimePickerListener, startHour, startMinute, true);
             case TIME_DIALOG_END:
-                return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, !rbAMPM.isChecked());
+                return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, true);
         }
         return null;
     }

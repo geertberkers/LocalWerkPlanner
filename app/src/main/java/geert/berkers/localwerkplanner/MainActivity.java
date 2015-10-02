@@ -222,25 +222,4 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             super.onBackPressed();
         }
     }
-
-    public static String changeTimeToAMPM(String time){
-        String returnString;
-        String originalTime = time;
-
-        int startHour;
-        try{ startHour = Integer.valueOf(originalTime.substring(0, 2)); }
-        catch (Exception ex) { startHour = Integer.valueOf(originalTime.substring(0, 1));}
-
-
-            if (startHour > 12) {
-                startHour = startHour - 12;
-                returnString = startHour + ":" + originalTime.substring(3,5);
-            }
-            else {
-                returnString = originalTime;
-            }
-
-
-        return returnString;
-    }
 }
