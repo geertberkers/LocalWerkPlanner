@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,7 +29,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private ListView workListView;
     private TextView emptyTextView;
     private DrawerLayout drawerLayout;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private MenuAdapter menuAdapter;
     private ActionBarDrawerToggle drawerListener;
@@ -49,14 +47,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
         listView.setAdapter(menuAdapter);
         listView.setOnItemClickListener(this);
-
-        mSwipeRefreshLayout.setColorSchemeColors(R.color.blauw);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getWorkFromDatabase();
-            }
-        });
 
         drawerListener = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
             public void onDrawerOpened(View drawerView) {
@@ -78,7 +68,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         workListView = (ListView) findViewById(R.id.workList);
         emptyTextView = (TextView) findViewById(R.id.emptyText);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
     }
 
     public static Date parseDate(String date) {
@@ -120,7 +109,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     private void showWork(boolean past) {
-        mSwipeRefreshLayout.setRefreshing(false);
         if (past) {
             emptyTextView.setText(R.string.not_worked_yet);
         } else {

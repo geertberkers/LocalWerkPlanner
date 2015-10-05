@@ -10,6 +10,7 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:src="@drawable/ic_star_black_24dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:scaleType="center"
         android:contentDescription="@string/fav_icon" />
@@ -22,6 +23,7 @@
         android:text="@string/favorite"
         android:textAllCaps="true"
         android:layout_toEndOf="@id/favIcon"
+        android:layout_toRightOf="@id/favIcon"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_marginTop="5dp" />
 
@@ -39,6 +41,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/favIcon"
+        android:layout_toRightOf="@id/favIcon"
         android:layout_alignTop="@+id/editStartTimeFav"
         android:layout_alignBottom="@+id/editStartTimeFav"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
@@ -53,22 +56,27 @@
         android:layout_alignTop="@+id/editStartTimeFav"
         android:layout_alignBottom="@+id/editStartTimeFav"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_toRightOf="@+id/vanTijd"
+        android:layout_marginRight="5dp"
         android:layout_toEndOf="@+id/vanTijd"
-        android:layout_marginEnd="5dp" />
+        android:layout_marginEnd="5dp"/>
 
     <ImageButton
         android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/editStartTimeFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_mode_edit_black_24dp"
         android:contentDescription="@string/edit_fav_start"
+        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/timeHeaderDivider"
         />
 
     <!-- End time -->
     <TextView
+        android:layout_alignLeft="@+id/vanTijd"
         android:layout_alignStart="@+id/vanTijd"
         android:src="@drawable/ic_star_black_24dp"
         android:text="@string/fav_endtime"
@@ -91,18 +99,22 @@
         android:layout_alignTop="@+id/editEndTimeFav"
         android:layout_alignBottom="@+id/editEndTimeFav"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_toRightOf="@+id/totTijd"
+        android:layout_marginRight="5dp"
         android:layout_toEndOf="@+id/totTijd"
-        android:layout_marginEnd="5dp" />
+        android:layout_marginEnd="5dp"/>
 
     <ImageButton
         android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/editEndTimeFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_mode_edit_black_24dp"
         android:contentDescription="@string/edit_fav_end"
         android:layout_below="@+id/editStartTimeFav"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <!-- Notation header and line -->
     <ImageView
@@ -111,6 +123,7 @@
         android:layout_height="36dp"
         android:layout_below="@id/editEndTimeFav"
         android:src="@drawable/ic_text_format_black_24dp"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
         android:contentDescription="@string/not_icon" />
@@ -120,6 +133,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/notation"
+        android:layout_toRightOf="@+id/favNotationIcon"
         android:layout_toEndOf="@+id/favNotationIcon"
         android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -143,6 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignLeft="@+id/vanTijd"
         android:layout_alignStart="@+id/vanTijd"
         android:layout_below="@+id/notationHeaderDivider"
         android:layout_marginTop="5dp" />
@@ -153,8 +168,9 @@
         android:text="@string/day_first_date"
         android:id="@+id/rbDayFirst"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignTop="@+id/dateFormat"
-        android:layout_toEndOf="@+id/totTijd" />
+        android:layout_below="@+id/dateFormat"
+        android:layout_alignLeft="@+id/dateFormat"
+        android:layout_alignStart="@+id/dateFormat" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -163,7 +179,8 @@
         android:id="@+id/rbMonthFirst"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/rbDayFirst"
-        android:layout_alignStart="@+id/rbDayFirst" />
+        android:layout_alignLeft="@+id/rbDayFirst"
+        android:layout_alignStart="@+id/rbDayFirst"/>
 
     <!-- Line, cancel and save button -->
     <View
@@ -178,6 +195,7 @@
         android:layout_height="wrap_content"
         android:weightSum="1"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
         <Button
