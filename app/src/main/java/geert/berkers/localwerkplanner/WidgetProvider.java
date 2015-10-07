@@ -1,5 +1,6 @@
 package geert.berkers.localwerkplanner;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -14,13 +15,12 @@ import android.widget.RemoteViews;
  */
 public class WidgetProvider extends AppWidgetProvider {
 
-    private static String UPDATE_ACTION = "UPDATE_ACTION";
+    public static String UPDATE_ACTION = "UPDATE_ACTION";
 
     /**
      * this method is called every 'x' mins as specified on widget_info.xml
      * this method is also called on every phone reboot
      **/
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
@@ -28,8 +28,20 @@ public class WidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
 
             RemoteViews remoteViews = updateWidgetListView(context, appWidgetId);
-            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
 
+            Intent launchActivity = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchActivity, 0);
+            remoteViews.setOnClickPendingIntent(R.id.widgetLayout, pendingIntent);
+
+            launchActivity = new Intent(context, WorkEditor.class);
+            pendingIntent = PendingIntent.getActivity(context, 0, launchActivity, 0);
+            remoteViews.setOnClickPendingIntent(R.id.addWorkWidget, pendingIntent);
+
+            launchActivity = new Intent(context, WorkEditor.class);
+            pendingIntent = PendingIntent.getActivity(context, 0, launchActivity, 0);
+            remoteViews.setOnClickPendingIntent(R.id.empty_view, pendingIntent);
+
+            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
@@ -57,7 +69,6 @@ public class WidgetProvider extends AppWidgetProvider {
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidget, R.id.listViewWidget);
                 System.out.println("Widget with ID: " + appWidget + " is updated");
             }
-
         } else if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
             System.out.println("APP WIDGET UPDATE");
 

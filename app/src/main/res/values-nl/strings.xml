@@ -54,5 +54,6 @@
     <string name="not_icon">Notatie icon</string>
     <string name="notation">Notatie:</string>
     <string name="widget">Werk Planner</string>
+    <string name="widget_no_job_add">Nog geen werk toegevoegd.\nKlik om toe te voegen!</string>
 
 </resources>

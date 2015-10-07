@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/widget_background"
-    android:id="@+id/widgetLayout"
-    >
+    android:id="@+id/widgetLayout" >
 
     <RelativeLayout
-
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -33,18 +33,16 @@
             android:layout_centerHorizontal="true"
             android:layout_alignTop="@+id/widgetImage"
             android:layout_alignBottom="@+id/widgetImage" />
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"/>
-<!--
+        <!--
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"/>
+        -->
         <ImageView
             android:id="@+id/addWorkWidget"
-            android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +50,7 @@
             android:layout_centerVertical="true"
             android:layout_alignTop="@+id/widgetImage"
             android:layout_alignBottom="@+id/widgetImage"/>
-            -->
+
     </RelativeLayout>
 
     <ImageView
@@ -77,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/no_work_added"
+        android:text="@string/widget_no_job_add"
         android:textColor="#000000"
         android:textSize="20sp"
         android:visibility="gone" />

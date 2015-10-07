@@ -57,6 +57,7 @@
     <string name="fav_icon">Favorite icon</string>
     <string name="not_icon">Notation icon</string>
     <string name="widget">Job Scheduler</string>
+    <string name="widget_no_job_add">No jobs added.\nPress to add one!</string>
 
 
 </resources>

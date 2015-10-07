@@ -12,7 +12,9 @@
         <!-- Main activity -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/work_planner" >
+            android:label="@string/work_planner"
+            android:launchMode="singleTask"
+            android:clearTaskOnLaunch="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
