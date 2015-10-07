@@ -9,7 +9,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.view.View;
@@ -28,6 +27,7 @@ public class WorkEditor extends ActionBarActivity {
     private Button btnAddWork;
     private Button btnAddExtraWork;
     private SharedPreferences sharedPref;
+    private UpdateAppWidget updateAppWidget;
 
     private TextView date;
     private TextView startTime;
@@ -58,6 +58,8 @@ public class WorkEditor extends ActionBarActivity {
         initControls();
         setWorkToEdit();
         setOnClickListeners();
+
+        updateAppWidget = new UpdateAppWidget(this);
     }
 
     private void setActionbar() {
@@ -98,6 +100,7 @@ public class WorkEditor extends ActionBarActivity {
                 setTitle(R.string.change_job);
             }
         } catch (Exception ex) {
+            //No work to edit found.
             Time now = new Time();
             now.setToNow();
 
@@ -131,8 +134,6 @@ public class WorkEditor extends ActionBarActivity {
             startTime.setText(startTimeS);
 
             btnAddExtraWork.setVisibility(View.VISIBLE);
-
-            Log.i("NoEditWork", "No work to edit found.");
         }
         finally {
             try {
@@ -166,7 +167,6 @@ public class WorkEditor extends ActionBarActivity {
         startTimeS = startTime.getText().toString();
         endTimeS = endTime.getText().toString();
 
-
         if (Integer.valueOf((startTimeS.substring(0,2) + startTimeS.substring(3,5))) > Integer.valueOf((endTimeS.substring(0, 2) + endTimeS.substring(3,5)))) {
             Toast.makeText(this, R.string.start_after_end, Toast.LENGTH_LONG).show();
         } else {
@@ -177,12 +177,13 @@ public class WorkEditor extends ActionBarActivity {
 
             if (workToEdit == null) {
                 if (workInDatabase == null) {
-                    System.out.println("Work in database is null");
                     db.addWork(newWork);
                     if(view.getId() == btnAddWork.getId()) {
+                        updateAppWidget.updateAppWidget();
                         finish();
                     }
                     else if (view.getId() == btnAddExtraWork.getId()) {
+                        updateAppWidget.updateAppWidget();
                         Toast.makeText(this, R.string.work_added, Toast.LENGTH_LONG).show();
                     }
                 } else {
@@ -190,13 +191,15 @@ public class WorkEditor extends ActionBarActivity {
                 }
             }else {
                 if(workInDatabase == null) {
-                    System.out.println("Update work: new date");
+                    // Update work: new date
                     db.deleteWork(workToEdit);
                     db.addWork(newWork);
+                    updateAppWidget.updateAppWidget();
                     finish();
                 } else if(workInDatabase.getDate(false).equals(newWork.getDate(false))) {
-                    System.out.println("Update work: same date");
+                    // Update work: same date
                     db.updateWork(newWork);
+                    updateAppWidget.updateAppWidget();
                     finish();
                 }
             }

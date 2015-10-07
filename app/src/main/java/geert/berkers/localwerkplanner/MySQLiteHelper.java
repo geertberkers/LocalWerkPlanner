@@ -101,7 +101,10 @@ class MySQLiteHelper extends SQLiteOpenHelper {
             Log.d("getWork(" + date + ")", "Failed method");
         }
 
-        // 5. return work
+        // 5. close database
+        db.close();
+
+        // 6. return work
         return work;
     }
 
@@ -128,10 +131,12 @@ class MySQLiteHelper extends SQLiteOpenHelper {
 
         Log.d("getAllWork()", workList.toString());
 
-        // return works
+        // 4. close database
+        db.close();
+
+        // 5. return works
         return workList;
     }
-
 
     public int updateWork(Work work) {
 

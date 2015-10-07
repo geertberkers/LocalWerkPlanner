@@ -112,6 +112,8 @@ class WorkAdapter extends BaseAdapter {
                     public void onClick(DialogInterface dialogInterface, int which) {
 
                         Dialog dialog = (Dialog) dialogInterface;
+                        Context context = dialog.getContext();
+
                         MySQLiteHelper db = new MySQLiteHelper(dialog.getContext());
                         db.deleteWork(workList.get(position).getWork());
 
@@ -126,6 +128,9 @@ class WorkAdapter extends BaseAdapter {
                             emptyTextView.setVisibility(View.INVISIBLE);
                             listView.setAdapter(adapter);
                         }
+
+                        UpdateAppWidget updateAppWidget = new UpdateAppWidget(context);
+                        updateAppWidget.updateAppWidget();
                     }
                 });
                 alertDialog.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {

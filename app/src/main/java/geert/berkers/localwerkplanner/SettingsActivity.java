@@ -30,7 +30,6 @@ public class SettingsActivity extends ActionBarActivity {
     private ImageButton editEndTime;
     private ImageButton editStartTime;
 
-    private String currentDateFormat;
     private String favStartHour;
     private String favStartMinute;
     private String favEndHour;
@@ -81,7 +80,7 @@ public class SettingsActivity extends ActionBarActivity {
     }
 
     private void setSettings() {
-        currentDateFormat = sharedPref.getString("dateFormat", "dd-MM-yyyy");
+        String currentDateFormat = sharedPref.getString("dateFormat", "dd-MM-yyyy");
         favStartHour = sharedPref.getString("fav_start_time_hour", "18");
         favStartMinute = sharedPref.getString("fav_start_time_minute", "00");
         favEndHour = sharedPref.getString("fav_end_time_hour", "20");
@@ -227,6 +226,10 @@ public class SettingsActivity extends ActionBarActivity {
         editor.apply();
 
         Toast.makeText(this, R.string.setting_saved, Toast.LENGTH_LONG).show();
+
+        UpdateAppWidget updateAppWidget = new UpdateAppWidget(this);
+        updateAppWidget.updateAppWidget();
+
         finish();
     }
 

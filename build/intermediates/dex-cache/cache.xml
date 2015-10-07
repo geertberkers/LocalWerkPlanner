@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Geert\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\release\support-annotations-22.0.0-f70b20c9625b7a552b52bf92485ee8737bbe52ca.jar" />
-    </item>
-    <item
-        jar="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\release\classes-cf85eb94a46ee9520951249bcfcf12062affce6b.jar" />
-    </item>
-    <item
         jar="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\release\internal_impl-22.0.0-aef0b2abcc382e135834d6464f2acbf9793ba809.jar" />
+        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-aef0b2abcc382e135834d6464f2acbf9793ba809.jar" />
     </item>
     <item
         jar="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\release\classes-4379c50f162c8a0d60a6d278f9e8bbb36e6b6001.jar" />
+        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-4379c50f162c8a0d60a6d278f9e8bbb36e6b6001.jar" />
+    </item>
+    <item
+        jar="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-cf85eb94a46ee9520951249bcfcf12062affce6b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Geert\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="D:\Documenten\Geert\Android\GeertsApps\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-f70b20c9625b7a552b52bf92485ee8737bbe52ca.jar" />
     </item>
 
 </items>
