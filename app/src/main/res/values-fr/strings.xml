@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="work_planner">Planificateur de tâche</string>
+    <string name="action_plus">Ajouter</string>
+    <string name="menu_picture">Image</string>
+    <string name="edit_picture">Éditer</string>
+    <string name="delete_picture">Supprimer</string>
+    <string name="drawer_open">Ouvrir</string>
+    <string name="drawer_close">Fermer</string>
+    <string name="addJob">Nouvelle tâche</string>
+    <string name="date">Date :</string>
+    <string name="van">De :</string>
+    <string name="tot">À :</string>
+    <string name="noWork">Aucune tâche!</string>
+    <string name="addMoreJobs">Ajouter des tâches!</string>
+    <string name="cancel">Annuler</string>
+    <string name="save">Sauvegarder</string>
+    <string name="history">Tâches passées</string>
+    <string name="info">À propos</string>
+    <string name="info_popup">Simple work planner!\nVersion: 1.0.6\nDéveloppeur: Geert Berkers</string>
+    <string name="settings">Réglages</string>
+    <string name="not_worked_yet">Pas encore commencé!</string>
+    <string name="delete_work">Supprimer tâche</string>
+    <string name="confirmation">Êtes-vous sûr ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="add_job">Ajouter tâche</string>
+    <string name="change_job">Éditer tâche!</string>
+    <string name="start_after_end">Une tâche ne peut commencer après sa fin!</string>
+    <string name="work_added">Ajouté!</string>
+    <string name="date_exists">Une tâche existe déjà à cette date!</string>
+    <string name="no_work_added">Aucune tâche ajoutée!</string>
+    <string name="setting_saved">Réglages sauvegardés!</string>
+    <string name="fav_endtime">Fin :</string>
+    <string name="fav_starttime">Départ:</string>
+    <string name="favorite">Préférences heure de:</string>
+    <string name="fav_icon">Icone Préférences</string>
+    <string name="not_icon">Icone Notation</string>
+
+    <string-array name="menu">
+        <item>Planificateur</item>
+        <item>Tâches passées</item>
+        <item>Réglages</item>
+        <item>À propos</item>
+    </string-array>
+
+    <string-array name="weekendDays">
+        <item>Samedi</item>
+        <item>Dimanche</item>
+    </string-array>
+
+    <string name="widget">Planificateur de tâche</string>
+    <string name="save_changes">Sauvegarder?</string>
+    <string name="notation">Format:</string>
+    <string name="widget_no_job_add">Aucune tâche ajoutée.\nAppuyez sur pour ajouter!</string>
+    <string name="changes_found">Changement trouvé</string>
+    <string name="edit_fav_end">Éditer heure de fin préférée :</string>
+    <string name="edit_fav_start">Éditer heure de départ préférée :</string>
+    <string name="planner">Planificateur</string>
+
+</resources>

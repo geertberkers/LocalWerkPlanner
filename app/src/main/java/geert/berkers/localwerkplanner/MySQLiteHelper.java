@@ -157,7 +157,6 @@ class MySQLiteHelper extends SQLiteOpenHelper {
         db.close();
 
         return i;
-
     }
 
     public void deleteWork(Work work) {

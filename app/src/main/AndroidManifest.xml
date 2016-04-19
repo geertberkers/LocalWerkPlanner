@@ -51,9 +51,8 @@
         <!-- Service for updating widget-->
         <service
             android:name=".WidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-        <!-- Broadcast receiver phone booting -->
+            android:permission="android.permission.BIND_REMOTEVIEWS" >
+        </service>
 
     </application>
 </manifest>

@@ -17,7 +17,7 @@
     <string name="planner">Planning</string>
     <string name="history">Gewerkt</string>
     <string name="info">Info</string>
-    <string name="info_popup">Simpele werk planner!\nVersie: 1.0.4\nOntwikkelaar: Geert Berkers</string>
+    <string name="info_popup">Simpele werk planner!\nVersie: 1.0.6\nOntwikkelaar: Geert Berkers</string>
     <string name="settings">Instellingen</string>
     <string name="not_worked_yet">Nog niet gewerkt!</string>
     <string name="no_work_added">Nog geen werk toegevoegd!</string>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transBlauw">#DDdfe3e5</color>
+    <color name="primary">#8a0a0c</color>
+    <color name="primary_dark">#d20b0d</color>
 </resources>

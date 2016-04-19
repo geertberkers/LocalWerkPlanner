@@ -148,12 +148,15 @@ public class WorkEditor extends ActionBarActivity {
 
     public void addWork(View view) {
 
+        if (view.getId() == R.id.btnAddExtraWork) {
+
+        }
         String month;
         String day;
 
-        if(dateFormat.equals("MM-dd-yyyy")) {
-            month = date.getText().toString().substring(0,2);
-            day = date.getText().toString().substring(3,5);
+        if (dateFormat.equals("MM-dd-yyyy")) {
+            month = date.getText().toString().substring(0, 2);
+            day = date.getText().toString().substring(3, 5);
         } else {
             month = date.getText().toString().substring(3, 5);
             day = date.getText().toString().substring(0, 2);
@@ -161,47 +164,51 @@ public class WorkEditor extends ActionBarActivity {
 
         String year = date.getText().toString().substring(6, 10);
 
-        if (day.length() == 1) { day = "0" + day; }
-        if (month.length() == 1) { month = "0" + month; }
+        if (day.length() == 1) {
+            day = "0" + day;
+        }
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
 
         startTimeS = startTime.getText().toString();
         endTimeS = endTime.getText().toString();
 
-        if (Integer.valueOf((startTimeS.substring(0,2) + startTimeS.substring(3,5))) > Integer.valueOf((endTimeS.substring(0, 2) + endTimeS.substring(3,5)))) {
+        /*
+        if (Integer.valueOf((startTimeS.substring(0,2) + startTimeS.substring(3,5))) > Integer.valueOf((endTimeS.substring(0, 2) + endTimeS.substring(3,5))) && !endTimeS.contains("00:00")) {
             Toast.makeText(this, R.string.start_after_end, Toast.LENGTH_LONG).show();
         } else {
-            MySQLiteHelper db = new MySQLiteHelper(this);
+        */
+        MySQLiteHelper db = new MySQLiteHelper(this);
 
-            Work workInDatabase = db.getWork(day + "-" + month + "-" + year);
-            Work newWork = new Work(MainActivity.parseDate(day + "-" + month + "-" + year), startTimeS, endTimeS);
+        Work workInDatabase = db.getWork(day + "-" + month + "-" + year);
+        Work newWork = new Work(MainActivity.parseDate(day + "-" + month + "-" + year), startTimeS, endTimeS);
 
-            if (workToEdit == null) {
-                if (workInDatabase == null) {
-                    db.addWork(newWork);
-                    if(view.getId() == btnAddWork.getId()) {
-                        updateAppWidget.updateAppWidget();
-                        finish();
-                    }
-                    else if (view.getId() == btnAddExtraWork.getId()) {
-                        updateAppWidget.updateAppWidget();
-                        Toast.makeText(this, R.string.work_added, Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(this, R.string.date_exists, Toast.LENGTH_LONG).show();
-                }
-            }else {
-                if(workInDatabase == null) {
-                    // Update work: new date
-                    db.deleteWork(workToEdit);
-                    db.addWork(newWork);
+        if (workToEdit == null) {
+            if (workInDatabase == null) {
+                db.addWork(newWork);
+                if (view.getId() == btnAddWork.getId()) {
                     updateAppWidget.updateAppWidget();
                     finish();
-                } else if(workInDatabase.getDate(false).equals(newWork.getDate(false))) {
-                    // Update work: same date
-                    db.updateWork(newWork);
+                } else if (view.getId() == btnAddExtraWork.getId()) {
                     updateAppWidget.updateAppWidget();
-                    finish();
+                    Toast.makeText(this, R.string.work_added, Toast.LENGTH_LONG).show();
                 }
+            } else {
+                Toast.makeText(this, R.string.date_exists, Toast.LENGTH_LONG).show();
+            }
+        } else {
+            if (workInDatabase == null) {
+                // Update work: new date
+                db.deleteWork(workToEdit);
+                db.addWork(newWork);
+                updateAppWidget.updateAppWidget();
+                finish();
+            } else if (workInDatabase.getDate(false).equals(newWork.getDate(false))) {
+                // Update work: same date
+                db.updateWork(newWork);
+                updateAppWidget.updateAppWidget();
+                finish();
             }
         }
     }
