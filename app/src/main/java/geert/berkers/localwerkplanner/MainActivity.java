@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private TextView emptyTextView;
     private DrawerLayout drawerLayout;
 
+    FloatingActionButton fabAdd;
+
     private MenuAdapter menuAdapter;
     private ActionBarDrawerToggle drawerListener;
 
@@ -55,10 +58,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         };
 
         drawerLayout.setDrawerListener(drawerListener);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setActionBar();
 
         getWorkFromDatabase();
     }
@@ -68,6 +69,28 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         workListView = (ListView) findViewById(R.id.workList);
         emptyTextView = (TextView) findViewById(R.id.emptyText);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent workEditorIntent = new Intent(MainActivity.this, WorkEditor.class);
+                startActivity(workEditorIntent);
+            }
+
+        });
+    }
+
+    private void setActionBar() {
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        String title = getString(R.string.work_planner);
+        if(title.contains(getString(R.string.planner))){
+            title = getString(R.string.planner);
+        }
+        setTitle(title);
     }
 
     public static Date parseDate(String date) {
@@ -79,10 +102,15 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     private void selectItem(int position) {
+
         listView.setItemChecked(position, true);
 
         if (menuAdapter.getItem(position).equals(getString(R.string.planner))) {
-            setTitle(getString(R.string.work_planner));
+            String title = getString(R.string.work_planner);
+            if(title.contains(getString(R.string.planner))){
+                title = getString(R.string.planner);
+            }
+            setTitle(title);
             showWork(false);
             drawerLayout.closeDrawer(listView);
         } else if (menuAdapter.getItem(position).equals(getString(R.string.history))) {
@@ -149,6 +177,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
         int id = item.getItemId();
 
         if (id == R.id.action_plus) {
@@ -156,7 +185,10 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             startActivity(workEditorIntent);
 
             return true;
-        } else if (drawerListener.onOptionsItemSelected(item)) {
+        } else
+        */
+        if (drawerListener.onOptionsItemSelected(item)) {
+            System.out.println("DrawerListener pressed");
             return true;
         }
 
