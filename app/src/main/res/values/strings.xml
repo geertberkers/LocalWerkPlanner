@@ -17,7 +17,7 @@
     <string name="planner">Planner</string>
     <string name="history">History</string>
     <string name="info">About</string>
-    <string name="info_popup">Simple job scheduler!\nVersion: 1.0.4\nDeveloper: Geert Berkers</string>
+    <string name="info_popup">Simple job scheduler!\nVersion: 1.1\nDeveloper: Geert Berkers</string>
     <string name="settings">Settings</string>
     <string name="not_worked_yet">No finished jobs yet!</string>
     <string name="delete_work">Delete job</string>
@@ -26,21 +26,20 @@
     <string name="no">No</string>
     <string name="add_job">Add job</string>
     <string name="change_job">Edit job!</string>
-    <string name="start_after_end">From time can not be after till time!</string>
     <string name="work_added">Job added!</string>
     <string name="date_exists">Job with this date already exists!</string>
     <string name="no_work_added">No jobs added!</string>
     <string name="setting_saved">Settings saved!</string>
-    <string name="fav_endtime">End time:</string>
-    <string name="fav_starttime">Start time:</string>
     <string name="day_first_date" translatable="false">dd-MM-yyyy</string>
     <string name="month_first_date" translatable="false">MM-dd-yyyy</string>
     <string name="changes_found">Changes found!</string>
     <string name="save_changes">Save changes?</string>
     <string name="time_setting" translatable="false">HH:mm</string>
-    <string name="edit_fav_start">Edit favorite starttime</string>
-    <string name="edit_fav_end">Edit favorite endtime</string>
-    <string name="notation">Notation:</string>
+    <string name="edit_fav_start">Favorite start time</string>
+    <string name="edit_fav_end">Favorite end time</string>
+    <string name="time_settings">Time</string>
+    <string name="date_settings">Date</string>
+    <string name="date_format">Favorite date format</string>
 
     <string-array name="menu">
         <item>Planner</item>
@@ -49,15 +48,20 @@
         <item>About</item>
     </string-array>
 
+    <string-array name="dateFormat">
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+    </string-array>
+
     <string-array name="weekendDays">
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
-    <string name="favorite">Favorite:</string>
-    <string name="fav_icon">Favorite icon</string>
-    <string name="not_icon">Notation icon</string>
+
     <string name="widget">Job Scheduler</string>
     <string name="widget_no_job_add">No jobs added.\nPress to add one!</string>
-
+    <string name="change_date">Change date</string>
+    <string name="change_start_time">Change start time</string>
+    <string name="change_end_time">Change end time</string>
 
 </resources>

@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mode_edit_black_24dp"
-                android:contentDescription="@string/edit_fav_start"
+                android:contentDescription="@string/change_date"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"/>
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mode_edit_black_24dp"
-                android:contentDescription="@string/edit_fav_start"
+                android:contentDescription="@string/change_start_time"
                 android:layout_below="@+id/editDate"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"/>
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_mode_edit_black_24dp"
-                android:contentDescription="@string/edit_fav_start"
+                android:contentDescription="@string/change_end_time"
                 android:layout_below="@+id/editStartTime"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"/>

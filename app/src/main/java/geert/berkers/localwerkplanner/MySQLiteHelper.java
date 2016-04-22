@@ -138,7 +138,7 @@ class MySQLiteHelper extends SQLiteOpenHelper {
         return workList;
     }
 
-    public int updateWork(Work work) {
+    public void updateWork(Work work) {
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -151,12 +151,10 @@ class MySQLiteHelper extends SQLiteOpenHelper {
 
         // 3. updating row
         //db.update(table,column/value,selections,selection)
-        int i = db.update(TABLE_WORK, values, DATE + " = ?", new String[] { String.valueOf(work.getDate(false)) });
+        db.update(TABLE_WORK, values, DATE + " = ?", new String[] { String.valueOf(work.getDate(false)) });
 
         // 4. close
         db.close();
-
-        return i;
     }
 
     public void deleteWork(Work work) {

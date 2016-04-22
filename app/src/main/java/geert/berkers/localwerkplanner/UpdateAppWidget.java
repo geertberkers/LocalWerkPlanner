@@ -8,7 +8,7 @@ import android.content.Intent;
 /**
  * Created by Geert on 7-10-2015
  */
-public class UpdateAppWidget {
+class UpdateAppWidget {
 
     private final Context context;
 

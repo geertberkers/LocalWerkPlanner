@@ -14,7 +14,7 @@ import java.util.Comparator;
 /**
  * Created by Geert on 6-10-2015
  */
-public class ListProvider implements RemoteViewsFactory {
+class ListProvider implements RemoteViewsFactory {
 
     private ArrayList<Work> workList = new ArrayList<>();
     private String currentDateFormat;

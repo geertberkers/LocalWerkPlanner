@@ -63,11 +63,13 @@ public class WorkEditor extends ActionBarActivity {
     }
 
     private void setActionbar() {
-        setTitle(getString(R.string.add_job));
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        if (getSupportActionBar() != null) {
+            setTitle(getString(R.string.add_job));
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        }
     }
 
     private void initControls() {
@@ -111,36 +113,41 @@ public class WorkEditor extends ActionBarActivity {
             month++;
 
             String sDay = String.valueOf(day);
-            if(day < 10) { sDay = "0" + String.valueOf(day); }
+            if (day < 10) {
+                sDay = "0" + String.valueOf(day);
+            }
 
             String sMonth = String.valueOf(month);
-            if(month < 10) { sMonth = "0" + String.valueOf(month); }
+            if (month < 10) {
+                sMonth = "0" + String.valueOf(month);
+            }
 
             String sYear = String.valueOf(year);
 
-            switch (dateFormat){
+            String dateString;
+            switch (dateFormat) {
                 case "dd-MM-yyyy":
-                    date.setText(sDay + "-" + sMonth + "-" + sYear);
+                    dateString = sDay + "-" + sMonth + "-" + sYear;
+                    date.setText(dateString);
                     break;
                 case "MM-dd-yyyy":
-                    date.setText(sMonth + "-" + sDay + "-" + sYear);
+                    dateString = sMonth + "-" + sDay + "-" + sYear;
+                    date.setText(dateString);
                     break;
             }
 
-            endTimeS = sharedPref.getString("fav_end_time_hour", "20") + ":" + sharedPref.getString("fav_end_time_minute", "30");
-            startTimeS = sharedPref.getString("fav_start_time_hour", "18") + ":" + sharedPref.getString("fav_start_time_minute", "00");
+            endTimeS = sharedPref.getString("endTime", "17:00");
+            startTimeS = sharedPref.getString("startTime", "08:30");
 
             endTime.setText(endTimeS);
             startTime.setText(startTimeS);
 
             btnAddExtraWork.setVisibility(View.VISIBLE);
-        }
-        finally {
+        } finally {
             try {
                 endTimeS = endTime.getText().toString();
                 startTimeS = startTime.getText().toString();
-            }
-            catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
@@ -148,9 +155,6 @@ public class WorkEditor extends ActionBarActivity {
 
     public void addWork(View view) {
 
-        if (view.getId() == R.id.btnAddExtraWork) {
-
-        }
         String month;
         String day;
 
@@ -174,11 +178,7 @@ public class WorkEditor extends ActionBarActivity {
         startTimeS = startTime.getText().toString();
         endTimeS = endTime.getText().toString();
 
-        /*
-        if (Integer.valueOf((startTimeS.substring(0,2) + startTimeS.substring(3,5))) > Integer.valueOf((endTimeS.substring(0, 2) + endTimeS.substring(3,5))) && !endTimeS.contains("00:00")) {
-            Toast.makeText(this, R.string.start_after_end, Toast.LENGTH_LONG).show();
-        } else {
-        */
+
         MySQLiteHelper db = new MySQLiteHelper(this);
 
         Work workInDatabase = db.getWork(day + "-" + month + "-" + year);
@@ -224,7 +224,7 @@ public class WorkEditor extends ActionBarActivity {
         }
     }
 
-    private void setOnClickListeners(){
+    private void setOnClickListeners() {
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -277,24 +277,36 @@ public class WorkEditor extends ActionBarActivity {
         int endHour;
         int endMinute;
 
-        try { startHour = Integer.valueOf(startTimeS.substring(0,2)); }
-        catch(Exception ex) { startHour = Integer.valueOf(startTimeS.substring(0,1)); }
+        try {
+            startHour = Integer.valueOf(startTimeS.substring(0, 2));
+        } catch (Exception ex) {
+            startHour = Integer.valueOf(startTimeS.substring(0, 1));
+        }
 
-        try { startMinute = Integer.valueOf(startTimeS.substring(3,5)); }
-        catch(Exception ex) { startMinute = Integer.valueOf(startTimeS.substring(3,4)); }
+        try {
+            startMinute = Integer.valueOf(startTimeS.substring(3, 5));
+        } catch (Exception ex) {
+            startMinute = Integer.valueOf(startTimeS.substring(3, 4));
+        }
 
-        try { endHour = Integer.valueOf(endTimeS.substring(0,2)); }
-        catch(Exception ex) { endHour = Integer.valueOf(endTimeS.substring(0,1)); }
+        try {
+            endHour = Integer.valueOf(endTimeS.substring(0, 2));
+        } catch (Exception ex) {
+            endHour = Integer.valueOf(endTimeS.substring(0, 1));
+        }
 
-        try { endMinute = Integer.valueOf(endTimeS.substring(3,5)); }
-        catch(Exception ex) { endMinute = Integer.valueOf(endTimeS.substring(3,4)); }
+        try {
+            endMinute = Integer.valueOf(endTimeS.substring(3, 5));
+        } catch (Exception ex) {
+            endMinute = Integer.valueOf(endTimeS.substring(3, 4));
+        }
 
         String month;
         String day;
 
-        if(dateFormat.equals("MM-dd-yyyy")) {
-            month = date.getText().toString().substring(0,2);
-            day = date.getText().toString().substring(3,5);
+        if (dateFormat.equals("MM-dd-yyyy")) {
+            month = date.getText().toString().substring(0, 2);
+            day = date.getText().toString().substring(3, 5);
         } else {
             month = date.getText().toString().substring(3, 5);
             day = date.getText().toString().substring(0, 2);
@@ -306,11 +318,17 @@ public class WorkEditor extends ActionBarActivity {
         int monthInt;
         int yearInt = Integer.valueOf(year);
 
-        try { dayInt = Integer.valueOf(day); }
-        catch(Exception ex) { dayInt = Integer.valueOf(day.substring(0,1)); }
+        try {
+            dayInt = Integer.valueOf(day);
+        } catch (Exception ex) {
+            dayInt = Integer.valueOf(day.substring(0, 1));
+        }
 
-        try { monthInt = Integer.valueOf(month); }
-        catch(Exception ex) { monthInt = Integer.valueOf(month.substring(0,1)); }
+        try {
+            monthInt = Integer.valueOf(month);
+        } catch (Exception ex) {
+            monthInt = Integer.valueOf(month.substring(0, 1));
+        }
 
         switch (id) {
             case TIME_DIALOG_START:
@@ -318,40 +336,48 @@ public class WorkEditor extends ActionBarActivity {
             case TIME_DIALOG_END:
                 return new TimePickerDialog(this, endTimePickerListener, endHour, endMinute, true);
             case DATE_DIALOG:
-                return new DatePickerDialog(this, datePickerListener, yearInt, (monthInt-1), dayInt);
+                return new DatePickerDialog(this, datePickerListener, yearInt, (monthInt - 1), dayInt);
         }
         return null;
     }
 
-    private TimePickerDialog.OnTimeSetListener startTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
+    private TimePickerDialog.OnTimeSetListener startTimePickerListener = new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             String favStartHour;
             String favStartMinute;
 
-            if(selectedHour < 10){
+            if (selectedHour < 10) {
                 favStartHour = "0" + selectedHour;
-            } else { favStartHour = String.valueOf(selectedHour); }
-            if(selectedMinute < 10) {
-                favStartMinute = "0"+ selectedMinute;
-            } else { favStartMinute = String.valueOf(selectedMinute); }
+            } else {
+                favStartHour = String.valueOf(selectedHour);
+            }
+            if (selectedMinute < 10) {
+                favStartMinute = "0" + selectedMinute;
+            } else {
+                favStartMinute = String.valueOf(selectedMinute);
+            }
             startTimeS = favStartHour + ":" + favStartMinute;
             startTime.setText(startTimeS);
             removeDialog(TIME_DIALOG_START);
         }
     };
 
-    private TimePickerDialog.OnTimeSetListener endTimePickerListener =  new TimePickerDialog.OnTimeSetListener() {
+    private TimePickerDialog.OnTimeSetListener endTimePickerListener = new TimePickerDialog.OnTimeSetListener() {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
             String favEndHour;
             String favEndMinute;
 
-            if(selectedHour < 10){
+            if (selectedHour < 10) {
                 favEndHour = "0" + selectedHour;
-            } else { favEndHour = String.valueOf(selectedHour); }
+            } else {
+                favEndHour = String.valueOf(selectedHour);
+            }
 
-            if(selectedMinute < 10) {
-                favEndMinute = "0"+ selectedMinute;
-            } else { favEndMinute = String.valueOf(selectedMinute); }
+            if (selectedMinute < 10) {
+                favEndMinute = "0" + selectedMinute;
+            } else {
+                favEndMinute = String.valueOf(selectedMinute);
+            }
 
             endTimeS = favEndHour + ":" + favEndMinute;
             endTime.setText(endTimeS);
@@ -359,23 +385,27 @@ public class WorkEditor extends ActionBarActivity {
         }
     };
 
-    private final DatePickerDialog.OnDateSetListener datePickerListener =  new DatePickerDialog.OnDateSetListener() {
+    private final DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             monthOfYear++;
             String month;
             String day;
 
-            if(monthOfYear < 10){
+            if (monthOfYear < 10) {
                 month = "0" + monthOfYear;
-            } else { month = String.valueOf(monthOfYear); }
+            } else {
+                month = String.valueOf(monthOfYear);
+            }
 
-            if(dayOfMonth < 10) {
-                day = "0"+ dayOfMonth;
-            } else { day = String.valueOf(dayOfMonth); }
+            if (dayOfMonth < 10) {
+                day = "0" + dayOfMonth;
+            } else {
+                day = String.valueOf(dayOfMonth);
+            }
 
 
-            switch (dateFormat){
+            switch (dateFormat) {
                 case "MM-dd-yyyy":
                     date.setText(new StringBuilder().append(month).append("-").append(day).append("-").append(year));
                     break;

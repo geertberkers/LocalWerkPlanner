@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+    <PreferenceCategory
+        android:title="@string/time_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <geert.berkers.localwerkplanner.TimePreference
+            android:key="startTime"
+            android:title="@string/edit_fav_start"
+            android:summary="%s"
+            android:defaultValue="08:30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <geert.berkers.localwerkplanner.TimePreference
+            android:key="endTime"
+            android:title="@string/edit_fav_end"
+            android:layout_width="wrap_content"
+            android:summary="%s"
+            android:defaultValue="17:00"
+            android:layout_height="wrap_content"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/date_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ListPreference
+            android:entries="@array/dateFormat"
+            android:entryValues="@array/dateFormat"
+            android:key="dateFormat"
+            android:defaultValue="dd-MM-yyyy"
+            android:summary="%s"
+            android:title="@string/date_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </PreferenceCategory>
+</PreferenceScreen>

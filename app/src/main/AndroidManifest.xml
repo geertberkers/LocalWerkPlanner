@@ -33,6 +33,8 @@
         <activity android:name=".SettingsActivity">
         </activity>
 
+        <!-- Settings activity -->
+
         <!-- Reciever for app widget-->
         <receiver
             android:icon="@mipmap/ic_launcher"

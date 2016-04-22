@@ -2,32 +2,11 @@
 <items version="2" >
 
     <item
-        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.2.1\jars\classes.jar"
+        jar="D:\Documents\Android\Android_SDK\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
-        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-e0e71b090ec51a0e57d7ff5d6f959c591cb65774.jar" />
-    </item>
-    <item
-        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
-        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-98dec06fa899b009ce4024eed84eff9ce3509bde.jar" />
-    </item>
-    <item
-        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\design\23.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
-        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-5cefe08e631b87653d617037c45db0fc9edf1481.jar" />
-    </item>
-    <item
-        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
-        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-e2d3713d6c724a7e48b9c9f12728595168636a86.jar" />
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0-19b6802875365994d15bb25e58e183b2c514650c.jar" />
     </item>
     <item
         jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
@@ -37,11 +16,25 @@
         <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-894dc1681119c37f9671775c3afdf2d2cf2dda3f.jar" />
     </item>
     <item
+        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-e2d3713d6c724a7e48b9c9f12728595168636a86.jar" />
+    </item>
+    <item
         jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
         <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-a53d87e1b64bd0e8efd5c4ce4c3993b25bba8c7a.jar" />
+    </item>
+    <item
+        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-98dec06fa899b009ce4024eed84eff9ce3509bde.jar" />
     </item>
     <item
         jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
@@ -51,11 +44,18 @@
         <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0-c8d9c3efbe502e0a311313b9f30ddb22def5065d.jar" />
     </item>
     <item
-        jar="D:\Documents\Android\Android_SDK\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
-        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0-19b6802875365994d15bb25e58e183b2c514650c.jar" />
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-8e70f0f9c5d881305162e9364e2e4fc1b02ca48a.jar" />
+    </item>
+    <item
+        jar="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="D:\Documents\Android\GeertsApps\Geerts WerkPlanner\LocalWerkPlanner\app\build\intermediates\pre-dexed\debug\classes-3b57e1b41d976ddea9fb7a0470c96dac0bc60906.jar" />
     </item>
 
 </items>

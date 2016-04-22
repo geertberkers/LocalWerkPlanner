@@ -15,7 +15,7 @@ import android.widget.RemoteViews;
  */
 public class WidgetProvider extends AppWidgetProvider {
 
-    public static String UPDATE_ACTION = "UPDATE_ACTION";
+    private static String UPDATE_ACTION = "UPDATE_ACTION";
 
     /**
      * this method is called every 'x' mins as specified on widget_info.xml

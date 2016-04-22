@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,7 +30,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     private TextView emptyTextView;
     private DrawerLayout drawerLayout;
 
-    FloatingActionButton fabAdd;
+    private FloatingActionButton fabAdd;
 
     private MenuAdapter menuAdapter;
     private ActionBarDrawerToggle drawerListener;
@@ -81,16 +80,18 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     }
 
     private void setActionBar() {
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String title = getString(R.string.work_planner);
-        if(title.contains(getString(R.string.planner))){
-            title = getString(R.string.planner);
+            String title = getString(R.string.work_planner);
+            if (title.contains(getString(R.string.planner))) {
+                title = getString(R.string.planner);
+            }
+            setTitle(title);
         }
-        setTitle(title);
     }
 
     public static Date parseDate(String date) {
@@ -167,12 +168,6 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectItem(position);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     @Override
