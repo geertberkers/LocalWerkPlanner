@@ -4,24 +4,35 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.text.format.Time;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
+
 /**
  * Created by Geert on 11-9-2015
  */
-public class WorkEditor extends ActionBarActivity {
+public class WorkEditor extends ActionBarActivity implements View.OnClickListener {
+
+    private int counter = 0;
+    private ShowcaseView showcaseView;
 
     private Work workToEdit;
     private Button btnAddWork;
@@ -32,10 +43,6 @@ public class WorkEditor extends ActionBarActivity {
     private TextView date;
     private TextView startTime;
     private TextView endTime;
-
-    private ImageButton editDate;
-    private ImageButton editStartTime;
-    private ImageButton editEndTime;
 
     private String startTimeS;
     private String endTimeS;
@@ -80,9 +87,48 @@ public class WorkEditor extends ActionBarActivity {
         endTime = (TextView) findViewById(R.id.txtEndTime);
         startTime = (TextView) findViewById(R.id.txtStartTime);
 
-        editDate = (ImageButton) findViewById(R.id.editDate);
-        editEndTime = (ImageButton) findViewById(R.id.editEndTime);
-        editStartTime = (ImageButton) findViewById(R.id.editStartTime);
+        showcaseView = new ShowcaseView.Builder(this)
+                .setTarget(new ViewTarget(date))
+                .setOnClickListener(this)
+                .setStyle(R.style.CustomShowcaseTheme2)
+                .setContentTitle("Change date.")
+                .setContentText("Click to change the date.")
+                .singleShot(42)
+                .build();
+        showcaseView.setButtonText("Next");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (counter) {
+            case 0:
+                showcaseView.setShowcase(new ViewTarget(startTime), true);
+                showcaseView.setContentTitle("Change time.");
+                showcaseView.setContentText("Click to change the start time.");
+
+                break;
+
+            case 1:
+                showcaseView.setShowcase(new ViewTarget(endTime), true);
+                showcaseView.setContentText("Click to change the end time.");
+                showcaseView.setButtonText("Close");
+                setAlpha(0.4f, date, startTime, endTime);
+                break;
+
+            case 2:
+                showcaseView.hide();
+                setAlpha(1.0f, date, startTime, endTime);
+                break;
+        }
+        counter++;
+    }
+
+    private void setAlpha(float alpha, View... views) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            for (View view : views) {
+                view.setAlpha(alpha);
+            }
+        }
     }
 
     private void setWorkToEdit() {
@@ -244,27 +290,6 @@ public class WorkEditor extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 showDialog(TIME_DIALOG_END);
-            }
-        });
-
-        editStartTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(TIME_DIALOG_START);
-            }
-        });
-
-        editEndTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(TIME_DIALOG_END);
-            }
-        });
-
-        editDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog(DATE_DIALOG);
             }
         });
     }

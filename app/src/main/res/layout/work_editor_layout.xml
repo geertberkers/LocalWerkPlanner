@@ -1,171 +1,135 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<!--
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <LinearLayout
-        android:id="@+id/firstWorkAdder"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-        <RelativeLayout
-            android:id="@+id/datumLayout"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">-->
+        <!-- Date -->
+        <ImageView
+            android:id="@+id/txtDatum"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/date"
+            android:src="@drawable/calendar"
+            />
 
-            <!-- Date -->
-            <TextView
-                android:text="@string/date"
-                android:id="@+id/txtDatum"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:gravity="center_vertical"
-                android:layout_alignTop="@+id/editDate"
-                android:layout_alignBottom="@+id/editDate"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/day_first_date"
                 android:id="@+id/txtDatumValue"
-                android:gravity="center_vertical"
-                android:layout_toEndOf="@id/txtDatum"
-                android:layout_toRightOf="@id/txtDatum"
-                android:layout_alignTop="@+id/editDate"
-                android:layout_alignBottom="@+id/editDate"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <ImageButton
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/editDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mode_edit_black_24dp"
-                android:contentDescription="@string/change_date"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"/>
-
-            <!-- From time -->
-            <TextView
-                android:text="@string/van"
-                android:id="@+id/vanTijd"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
-                android:layout_below="@id/editDate"
-                android:layout_alignTop="@+id/editStartTime"
-                android:layout_alignBottom="@+id/editStartTime"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
+                android:text="@string/day_first_date"
+                android:textColor="#000000"
+                android:textSize="36sp"/>
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/time_setting"
-                android:id="@+id/txtStartTime"
-                android:layout_toEndOf="@+id/vanTijd"
-                android:layout_toRightOf="@+id/vanTijd"
-                android:gravity="center_vertical"
-                android:layout_below="@id/editDate"
-                android:layout_alignTop="@+id/editStartTime"
-                android:layout_alignBottom="@+id/editStartTime"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                />
+    </LinearLayout>
 
-            <ImageButton
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/editStartTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mode_edit_black_24dp"
-                android:contentDescription="@string/change_start_time"
-                android:layout_below="@+id/editDate"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"/>
-
-            <!-- End time -->
-            <TextView
-                android:text="@string/tot"
-                android:id="@+id/totTijd"
-                android:layout_width="100dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                android:layout_below="@+id/editStartTime"
-                android:layout_alignTop="@+id/editEndTime"
-                android:layout_alignBottom="@+id/editEndTime"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/time_setting"
-                android:id="@+id/txtEndTime"
-                android:gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-
-                android:layout_alignTop="@+id/editEndTime"
-                android:layout_alignBottom="@+id/editEndTime"
-                android:layout_toEndOf="@+id/totTijd"
-                android:layout_toRightOf="@+id/totTijd"/>
-
-            <ImageButton
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/editEndTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_mode_edit_black_24dp"
-                android:contentDescription="@string/change_end_time"
-                android:layout_below="@+id/editStartTime"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"/>
-
-        <!--</RelativeLayout>
-    </LinearLayout>-->
-
-    <Button
-        android:onClick="addWork"
-        android:id="@+id/btnAddWork"
-        android:text="@string/addJob"
-        android:layout_marginTop="20dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editEndTime"
-        android:layout_alignEnd="@+id/btnAddExtraWork"
-        android:layout_alignStart="@+id/btnAddExtraWork"
-        android:layout_alignRight="@+id/btnAddExtraWork"
-        android:layout_alignLeft="@+id/btnAddExtraWork"/>
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <Button
-        android:onClick="addWork"
-        android:id="@+id/btnAddExtraWork"
-        android:text="@string/addMoreJobs"
-        android:layout_width="wrap_content"
+        <!-- From time -->
+        <ImageView
+            android:id="@+id/vanTijd"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/van"
+            android:src="@drawable/ic_schedule_black_36dp"
+            />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75">
+
+            <TextView
+                android:id="@+id/txtStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_vertical"
+                android:text="@string/time_setting"
+                android:textColor="#000000"
+                android:textSize="36sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnAddWork"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-</RelativeLayout>
+        <!-- End time -->
+        <ImageView
+            android:id="@+id/totTijd"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/tot"
+            android:src="@drawable/ic_schedule_black_36dp"
+            />
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75">
+
+            <TextView
+                android:id="@+id/txtEndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_vertical"
+                android:text="@string/time_setting"
+                android:textColor="#000000"
+                android:textSize="36sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btnAddWork"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="addWork"
+            android:text="@string/addJob"/>
+
+        <Button
+            android:id="@+id/btnAddExtraWork"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:onClick="addWork"
+            android:text="@string/addMoreJobs"/>
+    </LinearLayout>
+</LinearLayout>

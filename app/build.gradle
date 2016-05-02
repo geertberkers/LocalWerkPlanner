@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "geert.berkers.localwerkplanner"
-        minSdkVersion 10
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.1"
@@ -22,5 +22,7 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
+    compile 'com.github.amlcurran.showcaseview:library:5.4.3'
+
 }
 
